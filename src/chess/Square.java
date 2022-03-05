@@ -3,9 +3,9 @@ package chess;
 import pieces.Piece;
 
 public class Square {
-    int xpos;
-    int ypos;
-    Piece piece;
+    public int xpos;
+    public int ypos;
+    public Piece piece;
 
     public Square(int xpos, int ypos, Piece piece) {
         this.xpos = xpos;

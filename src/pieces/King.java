@@ -9,6 +9,11 @@ public class King extends Piece {
     }
 
     public boolean isValidMove(Square start, Square end) {
-        return false;
+
+        if (start.xpos - end.xpos > 1 || start.ypos - end.ypos > 1) {
+            return false;
+        }
+
+        return true;
     }
 }
