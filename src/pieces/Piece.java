@@ -4,18 +4,17 @@ import chess.Square;
 
 public abstract class Piece {
 
-    Square currentPosition;
-    boolean isTaken;
-    boolean isWhite;
+    public boolean isTaken;
+    public boolean isWhite;
 
-    public Piece(Square start, boolean isWhite) {
-        currentPosition = start;
+    public Piece(boolean isWhite) {
         isTaken = false;
         this.isWhite = isWhite;
     }
 
-    public Piece(Square start) {
-        this(start, false);
+    public Piece() {
+        this(false);
+        isTaken = false;
     }
 
     public abstract boolean isValidMove(Square start, Square end);

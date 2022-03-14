@@ -4,8 +4,8 @@ import chess.Square;
 
 public class King extends Piece {
 
-    public King(Square start) {
-        super(start);
+    public King(boolean isWhite) {
+        super(isWhite);
     }
 
     public boolean isValidMove(Square start, Square end) {
@@ -15,5 +15,9 @@ public class King extends Piece {
         }
 
         return true;
+    }
+
+    public String toString() {
+        return isWhite ? "wK " : "bK ";
     }
 }
