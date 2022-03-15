@@ -8,7 +8,7 @@ import pieces.Queen;
 import pieces.Rook;
 
 public class Board {
-    Square[][] board;
+    public Square[][] board;
 
     public Board() {
         board = new Square[8][8];
@@ -68,6 +68,15 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             char letter = (char) (i + 97);
             System.out.print(letter + "  ");
+        }
+    }
+
+    // check whether it is checkmate for either white or black (wip)
+    public void isCheckmate(boolean isWhite) {
+        if (isWhite) {
+
+        } else {
+
         }
     }
 }

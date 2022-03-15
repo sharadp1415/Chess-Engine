@@ -1,5 +1,6 @@
 package pieces;
 
+import chess.Board;
 import chess.Square;
 
 public class Pawn extends Piece {
@@ -8,7 +9,7 @@ public class Pawn extends Piece {
         super(isWhite);
     }
 
-    public boolean isValidMove(Square start, Square end) {
+    public boolean isValidMove(Square start, Square end, Board board) {
         return false;
     }
 

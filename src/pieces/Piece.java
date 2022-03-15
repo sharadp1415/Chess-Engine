@@ -1,5 +1,6 @@
 package pieces;
 
+import chess.Board;
 import chess.Square;
 
 public abstract class Piece {
@@ -17,5 +18,6 @@ public abstract class Piece {
         isTaken = false;
     }
 
-    public abstract boolean isValidMove(Square start, Square end);
+    // checks if move is valid for the piece, does NOT check for OutOfBounds
+    public abstract boolean isValidMove(Square start, Square end, Board board);
 }

@@ -22,5 +22,7 @@ public class Chess {
         Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
         end.piece = piece;
         board.printBoard();
+
+        scanner.close();
     }
 }
