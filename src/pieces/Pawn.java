@@ -5,6 +5,8 @@ import chess.Square;
 
 public class Pawn extends Piece {
 
+    boolean moved = false;
+
     public Pawn(boolean isWhite) {
         super(isWhite);
     }
