@@ -14,7 +14,6 @@ public class Bishop extends Piece {
             return false;
 
         if (Math.abs(start.xpos - end.xpos) != Math.abs(start.ypos - end.ypos)) {
-            System.out.println("bruh");
             return false;
         }
 
