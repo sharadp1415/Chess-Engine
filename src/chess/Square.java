@@ -14,4 +14,5 @@ public class Square {
         this.piece = piece;
         this.isLightSquare = isLightSquare;
     }
+
 }
