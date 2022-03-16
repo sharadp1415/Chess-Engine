@@ -9,6 +9,7 @@ import pieces.Rook;
 
 public class Board {
     public Square[][] board;
+    // might add HashSets for set of black pieces and set of white pieces
 
     public Board() {
         board = new Square[8][8];
