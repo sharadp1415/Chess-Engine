@@ -56,7 +56,7 @@ public class Pawn extends Piece {
                 }
             }
             if (end.xpos - start.xpos == 1 && Math.abs(end.ypos - start.ypos) == 1) {
-                if (end.piece == null || end.piece.isWhite) {
+                if (end.piece == null || !end.piece.isWhite) {
                     return false;
                 }
             }
