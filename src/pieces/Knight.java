@@ -11,7 +11,7 @@ public class Knight extends Piece {
 
     public boolean isValidMove(Square start, Square end, Board board) {
 
-        if (Math.abs(start.xpos - end.xpos) * Math.abs(start.ypos - end.ypos) != 2) {
+        if (Math.abs(start.rowpos - end.rowpos) * Math.abs(start.colpos - end.colpos) != 2) {
             return false;
         }
 

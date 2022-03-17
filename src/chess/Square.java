@@ -3,14 +3,14 @@ package chess;
 import pieces.Piece;
 
 public class Square {
-    public int xpos;
-    public int ypos;
+    public int rowpos;
+    public int colpos;
     public Piece piece;
     boolean isLightSquare;
 
-    public Square(int xpos, int ypos, Piece piece, boolean isLightSquare) {
-        this.xpos = xpos;
-        this.ypos = ypos;
+    public Square(int rowpos, int colpos, Piece piece, boolean isLightSquare) {
+        this.rowpos = rowpos;
+        this.colpos = colpos;
         this.piece = piece;
         this.isLightSquare = isLightSquare;
     }

@@ -13,36 +13,36 @@ public class Bishop extends Piece {
         if (start.equals(end))
             return false;
 
-        if (Math.abs(start.xpos - end.xpos) != Math.abs(start.ypos - end.ypos)) {
+        if (Math.abs(start.rowpos - end.rowpos) != Math.abs(start.colpos - end.colpos)) {
             return false;
         }
 
         // check if any pieces are in between start and end square
-        if (start.xpos < end.xpos) {
-            if (start.ypos < end.ypos) {
+        if (start.rowpos < end.rowpos) {
+            if (start.colpos < end.colpos) {
                 // down and right
-                for (int i = 1; i < Math.abs(end.xpos - start.xpos); i++) {
-                    if (b.board[start.xpos + i][start.ypos + i].piece != null)
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    if (b.board[start.rowpos + i][start.colpos + i].piece != null)
                         return false;
                 }
             } else {
                 // down and left
-                for (int i = 1; i < Math.abs(end.xpos - start.xpos); i++) {
-                    if (b.board[start.xpos + i][start.ypos - i].piece != null)
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    if (b.board[start.rowpos + i][start.colpos - i].piece != null)
                         return false;
                 }
             }
         } else {
-            if (start.ypos < end.ypos) {
+            if (start.colpos < end.colpos) {
                 // up and right
-                for (int i = 1; i < Math.abs(end.xpos - start.xpos); i++) {
-                    if (b.board[start.xpos - i][start.ypos + i].piece != null)
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    if (b.board[start.rowpos - i][start.colpos + i].piece != null)
                         return false;
                 }
             } else {
                 // up and left
-                for (int i = 1; i < Math.abs(end.xpos - start.xpos); i++) {
-                    if (b.board[start.xpos - i][start.ypos - i].piece != null)
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    if (b.board[start.rowpos - i][start.colpos - i].piece != null)
                         return false;
                 }
             }

@@ -9,8 +9,8 @@ public class Queen extends Piece {
     }
 
     public boolean isValidMove(Square start, Square end, Board board) {
-        if (Math.abs(start.xpos - end.xpos) != Math.abs(start.ypos - end.ypos)
-                && (start.xpos - end.xpos) * (start.ypos - end.ypos) != 0) {
+        if (Math.abs(start.rowpos - end.rowpos) != Math.abs(start.colpos - end.colpos)
+                && (start.rowpos - end.rowpos) * (start.colpos - end.colpos) != 0) {
             return false;
         }
 
