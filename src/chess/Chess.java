@@ -29,6 +29,10 @@ public class Chess {
             } else {
                 System.out.println("Invalid Move");
             }
+
+            if (board.inCheck(true)) {
+                // System.out.println("Check");
+            }
         }
 
         scanner.close();

@@ -13,11 +13,14 @@ import pieces.Rook;
 public class Board {
     public Square[][] board;
     // might add HashSets for set of black pieces and set of white pieces
-    // public HashSet<Piece> blackPieces;
-    // public HashSet<Piece> whitePieces;
+    public HashSet<Piece> blackPieces;
+    public HashSet<Piece> whitePieces;
 
     public Board() {
         board = new Square[8][8];
+        blackPieces = new HashSet<>();
+        whitePieces = new HashSet<>();
+
         int count = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -54,6 +57,13 @@ public class Board {
         board[7][5].piece = new Bishop(true, board[7][5]);
         board[7][3].piece = new Queen(true, board[7][3]);
         board[7][4].piece = new King(true, board[7][4]);
+
+        for (int i = 0; i < 8; i++) {
+            blackPieces.add(board[0][i].piece);
+            blackPieces.add(board[1][i].piece);
+            whitePieces.add(board[7][i].piece);
+            whitePieces.add(board[6][i].piece);
+        }
     }
 
     public void printBoard() {
@@ -78,11 +88,33 @@ public class Board {
     }
 
     // check whether white or black king is in check (wip)
-    public void inCheck(boolean isWhite) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
+    public boolean inCheck(boolean isWhite) {
+        HashSet<Piece> oppPieces = null;
+        Square kingPosition = null;
 
+        if (isWhite) {
+            oppPieces = blackPieces;
+            for (Piece piece : whitePieces) {
+                if (piece instanceof King) {
+                    kingPosition = piece.square;
+                }
+            }
+        } else {
+            oppPieces = whitePieces;
+            for (Piece piece : blackPieces) {
+                if (piece instanceof King) {
+                    kingPosition = piece.square;
+                }
             }
         }
+
+        for (Piece piece : oppPieces) {
+            if (piece.isValidMove(piece.square, kingPosition, this)) {
+                System.out.println("\ncheck\tattacking piece: " + piece + "\tKing Position: " + kingPosition);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
