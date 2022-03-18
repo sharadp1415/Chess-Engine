@@ -77,7 +77,7 @@ public class Queen extends Piece {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     public String toString() {
