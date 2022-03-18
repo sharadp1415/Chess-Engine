@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.HashSet;
+
 import chess.Board;
 import chess.Square;
 
@@ -79,6 +81,10 @@ public class Pawn extends Piece {
 
         moved = true;
         return true;
+    }
+
+    public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
+        return new HashSet<>();
     }
 
     public String toString() {

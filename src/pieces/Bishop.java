@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.HashSet;
+
 import chess.Board;
 import chess.Square;
 
@@ -54,6 +56,40 @@ public class Bishop extends Piece {
         }
 
         return true;
+    }
+
+    public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
+        HashSet<Square> squares = new HashSet<>();
+
+        if (start.rowpos < end.rowpos) {
+            if (start.colpos < end.colpos) {
+                // down and right
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    squares.add(b.board[start.rowpos + i][start.colpos + i]);
+
+                }
+            } else {
+                // down and left
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    squares.add(b.board[start.rowpos + i][start.colpos - i]);
+
+                }
+            }
+        } else {
+            if (start.colpos < end.colpos) {
+                // up and right
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    squares.add(b.board[start.rowpos - i][start.colpos + i]);
+                }
+            } else {
+                // up and left
+                for (int i = 1; i < Math.abs(end.rowpos - start.rowpos); i++) {
+                    squares.add(b.board[start.rowpos - i][start.colpos - i]);
+                }
+            }
+        }
+
+        return squares;
     }
 
     public String toString() {

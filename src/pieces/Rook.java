@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.HashSet;
+
 import chess.Board;
 import chess.Square;
 
@@ -47,6 +49,30 @@ public class Rook extends Piece {
         }
 
         return true;
+    }
+
+    public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
+        HashSet<Square> squares = new HashSet<>();
+
+        if (start.rowpos - end.rowpos == 0) {
+            for (int i = 1; i < Math.abs(start.colpos - end.colpos); i++) {
+                if (start.colpos < end.colpos) {
+                    squares.add(b.board[start.rowpos][start.colpos + i]);
+                } else {
+                    squares.add(b.board[start.rowpos][start.colpos - i]);
+                }
+            }
+        } else {
+            for (int i = 1; i < Math.abs(start.rowpos - end.rowpos); i++) {
+                if (start.rowpos < end.rowpos) {
+                    squares.add(b.board[start.rowpos + i][start.colpos]);
+                } else {
+                    squares.add(b.board[start.rowpos - i][start.colpos]);
+                }
+            }
+        }
+
+        return squares;
     }
 
     public String toString() {

@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.HashSet;
+
 import chess.Board;
 import chess.Square;
 
@@ -20,5 +22,7 @@ public abstract class Piece {
     }
 
     // checks if move is valid for the piece, does NOT check for OutOfBounds
-    public abstract boolean isValidMove(Square start, Square end, Board board);
+    public abstract boolean isValidMove(Square start, Square end, Board b);
+
+    public abstract HashSet<Square> squaresBetween(Square start, Square end, Board b);
 }

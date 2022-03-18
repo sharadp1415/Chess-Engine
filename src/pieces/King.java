@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.HashSet;
+
 import chess.Board;
 import chess.Square;
 
@@ -9,7 +11,10 @@ public class King extends Piece {
         super(isWhite, square);
     }
 
-    public boolean isValidMove(Square start, Square end, Board board) {
+    public boolean isValidMove(Square start, Square end, Board b) {
+        if (start.equals(end)) {
+            return false;
+        }
 
         if (Math.abs(start.rowpos - end.rowpos) > 1 || Math.abs(start.colpos - end.colpos) > 1) {
             return false;
@@ -19,7 +24,25 @@ public class King extends Piece {
             return false;
         }
 
+        HashSet<Piece> oppPieces;
+
+        if (start.piece.isWhite) {
+            oppPieces = b.blackPieces;
+        } else {
+            oppPieces = b.whitePieces;
+        }
+
+        for (Piece piece : oppPieces) {
+            if (piece.isValidMove(piece.square, end, b)) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
+        return new HashSet<>();
     }
 
     public String toString() {
