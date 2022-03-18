@@ -7,8 +7,8 @@ public class Pawn extends Piece {
 
     boolean moved = false;
 
-    public Pawn(boolean isWhite) {
-        super(isWhite);
+    public Pawn(boolean isWhite, Square square) {
+        super(isWhite, square);
     }
 
     public boolean isValidMove(Square start, Square end, Board b) {

@@ -24,6 +24,7 @@ public class Chess {
             if (piece.isValidMove(start, end, board)) {
                 start.piece = null;
                 end.piece = piece;
+                piece.square = end;
                 board.printBoard();
             } else {
                 System.out.println("Invalid Move");

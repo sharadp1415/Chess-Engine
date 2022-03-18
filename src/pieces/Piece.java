@@ -7,15 +7,16 @@ public abstract class Piece {
 
     public boolean isTaken;
     public boolean isWhite;
+    public Square square;
 
-    public Piece(boolean isWhite) {
-        isTaken = false;
+    public Piece(boolean isWhite, Square square) {
+        this.isTaken = false;
+        this.square = square;
         this.isWhite = isWhite;
     }
 
     public Piece() {
-        this(false);
-        isTaken = false;
+        this(false, null);
     }
 
     // checks if move is valid for the piece, does NOT check for OutOfBounds

@@ -4,8 +4,8 @@ import chess.Board;
 import chess.Square;
 
 public class Queen extends Piece {
-    public Queen(boolean isWhite) {
-        super(isWhite);
+    public Queen(boolean isWhite, Square square) {
+        super(isWhite, square);
     }
 
     public boolean isValidMove(Square start, Square end, Board b) {

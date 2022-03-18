@@ -5,8 +5,8 @@ import chess.Square;
 
 public class King extends Piece {
 
-    public King(boolean isWhite) {
-        super(isWhite);
+    public King(boolean isWhite, Square square) {
+        super(isWhite, square);
     }
 
     public boolean isValidMove(Square start, Square end, Board board) {
