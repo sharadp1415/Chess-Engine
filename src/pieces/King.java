@@ -33,9 +33,13 @@ public class King extends Piece {
         }
 
         for (Piece piece : oppPieces) {
+            Piece temp = end.piece;
+            end.piece = null;
             if (piece.isValidMove(piece.square, end, b)) {
+                end.piece = temp;
                 return false;
             }
+            end.piece = temp;
         }
 
         return true;

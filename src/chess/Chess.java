@@ -30,8 +30,12 @@ public class Chess {
                 System.out.println("Invalid Move");
             }
 
-            if (board.inCheck(true)) {
-                // System.out.println("Check");
+            if (board.inCheck(false)) {
+                System.out.println("\nCheck");
+            }
+
+            if (board.inCheckmate(false)) {
+                System.out.println("Checkmate");
             }
         }
 

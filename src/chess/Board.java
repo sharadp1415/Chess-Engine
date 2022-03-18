@@ -110,7 +110,8 @@ public class Board {
 
         for (Piece piece : oppPieces) {
             if (piece.isValidMove(piece.square, kingPosition, this)) {
-                System.out.println("\ncheck\tattacking piece: " + piece + "\tKing Position: " + kingPosition);
+                // System.out.println("\ncheck\tattacking piece: " + piece + "\tKing Position: "
+                // + kingPosition);
                 return true;
             }
         }
@@ -123,6 +124,8 @@ public class Board {
         if (!inCheck(isWhite)) {
             return false;
         }
+
+        System.out.println("cleared1");
 
         HashSet<Piece> oppPieces = null;
         HashSet<Piece> ownPieces = null;
@@ -154,11 +157,14 @@ public class Board {
                         && kingPosition.colpos + j < 8) {
                     Square end = board[kingPosition.rowpos + i][kingPosition.colpos + j];
                     if (kingPosition.piece.isValidMove(kingPosition, end, this)) {
+                        System.out.println("King Position: " + kingPosition + "\tPossible Square: " + end);
                         return false;
                     }
                 }
             }
         }
+
+        System.out.println("cleared2");
 
         // need to add option for pieces to block
         // introduce a set of all pieces checking the king
