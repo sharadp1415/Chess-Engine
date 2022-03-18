@@ -79,7 +79,41 @@ public class Queen extends Piece {
             return false;
         }
 
-        return true;
+        // check if piece is pinned (perform the move and check if the king is in check
+        // and revert back)
+        boolean output;
+        Piece piece = start.piece;
+        Piece capturedPiece = end.piece;
+        if (capturedPiece != null) {
+            if (capturedPiece.isWhite) {
+                b.whitePieces.remove(capturedPiece);
+            } else {
+                b.blackPieces.remove(capturedPiece);
+            }
+        }
+        start.piece = null;
+        end.piece = piece;
+        piece.square = end;
+        // capturedPiece.square = null;
+        if (b.inCheck(piece.isWhite)) {
+            output = false;
+        } else {
+            output = true;
+        }
+
+        start.piece = piece;
+        piece.square = start;
+        end.piece = capturedPiece;
+        // capturedPiece.square = end;
+        if (capturedPiece != null) {
+            if (capturedPiece.isWhite) {
+                b.whitePieces.add(capturedPiece);
+            } else {
+                b.blackPieces.add(capturedPiece);
+            }
+        }
+
+        return output;
     }
 
     public HashSet<Square> squaresBetween(Square start, Square end, Board b) {

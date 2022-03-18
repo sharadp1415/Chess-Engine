@@ -181,6 +181,7 @@ public class Board {
             }
         }
 
+        // check if block attacking piece
         for (Piece attackPiece : attackPieces) {
             HashSet<Square> squaresBetween = attackPiece.squaresBetween(attackPiece.square, kingPosition, this);
             for (Square square : squaresBetween) {
@@ -188,6 +189,15 @@ public class Board {
                     if (ownPiece.isValidMove(ownPiece.square, square, this)) {
                         return false;
                     }
+                }
+            }
+        }
+
+        // check if capture attacking piece
+        for (Piece attackPiece : attackPieces) {
+            for (Piece ownPiece : ownPieces) {
+                if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, this)) {
+                    return false;
                 }
             }
         }

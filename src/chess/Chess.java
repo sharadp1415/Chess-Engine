@@ -22,6 +22,18 @@ public class Chess {
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
             if (piece.isValidMove(start, end, board)) {
+                // implement capturing a piece and removing it from set of black or white pieces
+                // and check for castling
+                // might move this logic to a different method in Chess class
+
+                Piece capturedPiece = end.piece;
+                if (capturedPiece != null) {
+                    if (capturedPiece.isWhite) {
+                        board.whitePieces.remove(capturedPiece);
+                    } else {
+                        board.blackPieces.remove(capturedPiece);
+                    }
+                }
                 start.piece = null;
                 end.piece = piece;
                 piece.square = end;
