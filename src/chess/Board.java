@@ -87,7 +87,7 @@ public class Board {
         }
     }
 
-    // check whether white or black king is in check (wip)
+    // check whether white or black king is in check
     public boolean inCheck(boolean isWhite) {
         HashSet<Piece> oppPieces = null;
         Square kingPosition = null;
@@ -116,5 +116,76 @@ public class Board {
         }
 
         return false;
+    }
+
+    public boolean inCheckmate(boolean isWhite) {
+        // check if king is in check
+        if (!inCheck(isWhite)) {
+            return false;
+        }
+
+        HashSet<Piece> oppPieces = null;
+        HashSet<Piece> ownPieces = null;
+        Square kingPosition = null;
+
+        // assign opponent & own pieces and king position
+        if (isWhite) {
+            oppPieces = blackPieces;
+            ownPieces = whitePieces;
+            for (Piece piece : whitePieces) {
+                if (piece instanceof King) {
+                    kingPosition = piece.square;
+                }
+            }
+        } else {
+            oppPieces = whitePieces;
+            ownPieces = blackPieces;
+            for (Piece piece : blackPieces) {
+                if (piece instanceof King) {
+                    kingPosition = piece.square;
+                }
+            }
+        }
+
+        // check if king has valid squares (wip)
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (kingPosition.rowpos + i > -1 && kingPosition.rowpos + i < 8 && kingPosition.colpos + j > -1
+                        && kingPosition.colpos + j < 8) {
+                    Square end = board[kingPosition.rowpos + i][kingPosition.colpos + j];
+                    if (kingPosition.piece.isValidMove(kingPosition, end, this)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // need to add option for pieces to block
+        // introduce a set of all pieces checking the king
+        // iterate through the set and for each piece, develop another set of all
+        // squares in between (implemented in each Piece subclass)
+        // return whether the set is not empty, signifying that a piece cannot be
+        // blocked
+
+        HashSet<Piece> attackPieces = new HashSet<>();
+
+        for (Piece piece : oppPieces) {
+            if (piece.isValidMove(piece.square, kingPosition, this)) {
+                attackPieces.add(piece);
+            }
+        }
+
+        for (Piece attackPiece : attackPieces) {
+            HashSet<Square> squaresBetween = attackPiece.squaresBetween(attackPiece.square, kingPosition, this);
+            for (Square square : squaresBetween) {
+                for (Piece ownPiece : ownPieces) {
+                    if (ownPiece.isValidMove(ownPiece.square, square, this)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }
