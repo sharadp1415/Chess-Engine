@@ -11,7 +11,7 @@ public class King extends Piece {
 
     public boolean isValidMove(Square start, Square end, Board board) {
 
-        if (start.rowpos - end.rowpos > 1 || start.colpos - end.colpos > 1) {
+        if (Math.abs(start.rowpos - end.rowpos) > 1 || Math.abs(start.colpos - end.colpos) > 1) {
             return false;
         }
 
