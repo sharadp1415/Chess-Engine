@@ -17,9 +17,20 @@ public class Chess {
         Scanner scanner = new Scanner(System.in);
         String input = "";
 
+        Boolean isWhiteTurn = true;
+
         while (!input.equals("exit")) {
             System.out.print("\n\nEnter Move: ");
             input = scanner.nextLine();
+
+            if(input.equals("resign")){
+                if(isWhiteTurn)
+                    System.out.println("Black wins");
+                else
+                    System.out.println("White wins");
+                break;
+            }
+
             String[] array = input.split(" ");
             // System.out.println(8 - (array[0].charAt(0) - 97));
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
@@ -53,6 +64,8 @@ public class Chess {
             if (board.inCheckmate(false)) {
                 System.out.println("Checkmate");
             }
+
+            isWhiteTurn = !isWhiteTurn;
         }
 
         scanner.close();
