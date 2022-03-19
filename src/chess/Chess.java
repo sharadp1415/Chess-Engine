@@ -50,7 +50,7 @@ public class Chess {
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
 
-            if((isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)){
+            if(piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)){
                 System.out.print("Illegal move, try again");
                 continue;
             }
