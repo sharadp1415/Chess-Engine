@@ -2,6 +2,7 @@ package chess;
 
 import java.util.Scanner;
 
+import pieces.King;
 import pieces.Piece;
 
 /**
@@ -62,8 +63,13 @@ public class Chess {
 
 
                 // castling check
-                if(Math.abs(start.colpos - end.colpos) == 2 && Math.abs(start.rowpos - end.rowpos) == 0){
-                    
+                if(start.piece instanceof King){
+                    if(Math.abs(start.colpos - end.colpos) == 2){
+                        // white piece kingside castle
+                        if(start.colpos - end.colpos == -2){
+                            
+                        }
+                    }
                 }
 
                 Piece capturedPiece = end.piece;

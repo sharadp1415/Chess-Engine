@@ -31,23 +31,24 @@ public class King extends Piece {
             // white castling
             if (this.isWhite) {
                 // castling king side (right)
-                if ((start.colpos - end.colpos) == 2) {
+                if ((start.colpos - end.colpos) == -2) {
                     Piece p = b.board[7][0].piece;
+                    // piece at end is not rook
                     if (p == null || !(p instanceof Rook))
                         return false;
 
-                    // rook being castled to has moved before
+                    // rook being castled has moved before
                     Rook r = (Rook) p;
                     if (!r.isFirstMove)
                         return false;
                     
-
                     return true;
+                    
                     
                 }
 
                 // castling queen side (left)
-                // if((start.colpos - end.colpos) == -2)
+                // if((start.colpos - end.colpos) == 2)
             }
 
             // black castling
