@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import pieces.Piece;
 
+/**
+ * @author Naman Bajaj, Sharad Prasad
+ */
+
 public class Chess {
 
     public static void main(String[] args) {

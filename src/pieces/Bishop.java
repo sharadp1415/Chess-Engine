@@ -5,6 +5,10 @@ import java.util.HashSet;
 import chess.Board;
 import chess.Square;
 
+/**
+ * @author Naman Bajaj, Sharad Prasad
+ */
+
 public class Bishop extends Piece {
 
     public Bishop(boolean isWhite, Square square) {

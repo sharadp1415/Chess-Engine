@@ -10,6 +10,10 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 
+/**
+ * @author Naman Bajaj, Sharad Prasad
+ */
+
 public class Board {
     public Square[][] board;
     // might add HashSets for set of black pieces and set of white pieces

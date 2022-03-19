@@ -2,6 +2,10 @@ package chess;
 
 import pieces.Piece;
 
+/**
+ * @author Naman Bajaj, Sharad Prasad
+ */
+
 public class Square {
     public int rowpos;
     public int colpos;
