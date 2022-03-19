@@ -23,6 +23,7 @@ public class Chess {
             System.out.print("\n\nEnter Move: ");
             input = scanner.nextLine();
 
+            // if one player resigns
             if(input.equals("resign")){
                 if(isWhiteTurn)
                     System.out.println("Black wins");
@@ -32,6 +33,14 @@ public class Chess {
             }
 
             String[] array = input.split(" ");
+
+            // check for draw offered
+            if(array.length > 2 && array[2].equals("draw?")){
+                while(!scanner.nextLine().equals("draw"))
+                    System.out.println("Illegal move, try again");
+                break;
+            }
+
             // System.out.println(8 - (array[0].charAt(0) - 97));
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
@@ -54,7 +63,7 @@ public class Chess {
                 piece.square = end;
                 board.printBoard();
             } else {
-                System.out.println("Invalid Move");
+                System.out.println("Illegal move, try again");
             }
 
             if (board.inCheck(false)) {
