@@ -11,8 +11,11 @@ import chess.Square;
 
 public class Rook extends Piece {
 
+    boolean isFirstMove;
+
     public Rook(boolean isWhite, Square square) {
         super(isWhite, square);
+        isFirstMove = true;
     }
 
     public boolean isValidMove(Square start, Square end, Board b) {
@@ -71,6 +74,7 @@ public class Rook extends Piece {
         if (b.inCheck(piece.isWhite)) {
             output = false;
         } else {
+            isFirstMove = false;
             output = true;
         }
 

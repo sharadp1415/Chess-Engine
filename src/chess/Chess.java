@@ -60,6 +60,12 @@ public class Chess {
                 // and check for castling
                 // might move this logic to a different method in Chess class
 
+
+                // castling check
+                if(Math.abs(start.colpos - end.colpos) == 2 && Math.abs(start.rowpos - end.rowpos) == 0){
+                    
+                }
+
                 Piece capturedPiece = end.piece;
                 if (capturedPiece != null) {
                     if (capturedPiece.isWhite) {
@@ -68,6 +74,9 @@ public class Chess {
                         board.blackPieces.remove(capturedPiece);
                     }
                 }
+
+
+
                 start.piece = null;
                 end.piece = piece;
                 piece.square = end;

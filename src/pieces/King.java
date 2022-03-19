@@ -10,14 +10,56 @@ import chess.Square;
  */
 
 public class King extends Piece {
+    boolean isFirstMove;
 
     public King(boolean isWhite, Square square) {
         super(isWhite, square);
+        isFirstMove = true;
     }
 
     public boolean isValidMove(Square start, Square end, Board b) {
         if (start.equals(end)) {
             return false;
+        }
+
+        // castling attempt found
+        if (Math.abs(start.colpos - end.colpos) == 2 && Math.abs(start.rowpos - end.rowpos) == 0) {
+            // king has been moved before
+            if (!this.isFirstMove)
+                return false;
+
+            // white castling
+            if (this.isWhite) {
+                // castling king side (right)
+                if ((start.colpos - end.colpos) == 2) {
+                    Piece p = b.board[7][0].piece;
+                    if (p == null || !(p instanceof Rook))
+                        return false;
+
+                    // rook being castled to has moved before
+                    Rook r = (Rook) p;
+                    if (!r.isFirstMove)
+                        return false;
+                    
+
+                    return true;
+                    
+                }
+
+                // castling queen side (left)
+                // if((start.colpos - end.colpos) == -2)
+            }
+
+            // black castling
+            else {
+                // castling king side (right)
+
+                // castling queen side (left)
+            }
+
+            // pieces in between king and rook
+
+            return true;
         }
 
         if (Math.abs(start.rowpos - end.rowpos) > 1 || Math.abs(start.colpos - end.colpos) > 1) {
@@ -46,6 +88,7 @@ public class King extends Piece {
             end.piece = temp;
         }
 
+        this.isFirstMove = false;
         return true;
     }
 
