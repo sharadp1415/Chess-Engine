@@ -20,7 +20,11 @@ public class Chess {
         Boolean isWhiteTurn = true;
 
         while (!input.equals("exit")) {
-            System.out.print("\n\nEnter Move: ");
+            if(isWhiteTurn)
+                System.out.print("\nWhite's Move: ");
+            else
+                System.out.print("\nBlack's Move: ");
+
             input = scanner.nextLine();
 
             // if one player resigns
@@ -45,6 +49,12 @@ public class Chess {
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
+
+            if((isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)){
+                System.out.print("Illegal move, try again");
+                continue;
+            }
+
             if (piece.isValidMove(start, end, board)) {
                 // implement capturing a piece and removing it from set of black or white pieces
                 // and check for castling
@@ -61,7 +71,9 @@ public class Chess {
                 start.piece = null;
                 end.piece = piece;
                 piece.square = end;
+                System.out.println();
                 board.printBoard();
+                System.out.println();
             } else {
                 System.out.println("Illegal move, try again");
             }
