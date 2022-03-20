@@ -3,12 +3,17 @@ package chess;
 import java.util.Scanner;
 
 import pieces.King;
+import pieces.Pawn;
 import pieces.Piece;
 
 /**
  * @author Naman Bajaj, Sharad Prasad
  */
 
+/**
+ * En passant in pawn class is work in progress may break code, comment out if
+ * does
+ */
 public class Chess {
 
     public static void main(String[] args) {
@@ -19,18 +24,20 @@ public class Chess {
         String input = "";
 
         Boolean isWhiteTurn = true;
+        int moveCounter = 0;
 
         while (!input.equals("exit")) {
-            if(isWhiteTurn)
+            if (isWhiteTurn)
                 System.out.print("\nWhite's Move: ");
             else
                 System.out.print("\nBlack's Move: ");
 
+            moveCounter++;
             input = scanner.nextLine();
 
             // if one player resigns
-            if(input.equals("resign")){
-                if(isWhiteTurn)
+            if (input.equals("resign")) {
+                if (isWhiteTurn)
                     System.out.println("Black wins");
                 else
                     System.out.println("White wins");
@@ -40,8 +47,8 @@ public class Chess {
             String[] array = input.split(" ");
 
             // check for draw offered
-            if(array.length > 2 && array[2].equals("draw?")){
-                while(!scanner.nextLine().equals("draw"))
+            if (array.length > 2 && array[2].equals("draw?")) {
+                while (!scanner.nextLine().equals("draw"))
                     System.out.println("Illegal move, try again");
                 break;
             }
@@ -51,26 +58,14 @@ public class Chess {
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
 
-            if(piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)){
+            if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
                 System.out.print("Illegal move, try again");
                 continue;
             }
 
             if (piece.isValidMove(start, end, board)) {
-                // implement capturing a piece and removing it from set of black or white pieces
-                // and check for castling
-                // might move this logic to a different method in Chess class
 
-
-                // castling check
-                if(start.piece instanceof King){
-                    if(Math.abs(start.colpos - end.colpos) == 2){
-                        // white piece kingside castle
-                        if(start.colpos - end.colpos == -2){
-                            
-                        }
-                    }
-                }
+                // castling check (moved to King class)
 
                 Piece capturedPiece = end.piece;
                 if (capturedPiece != null) {
@@ -81,8 +76,6 @@ public class Chess {
                     }
                 }
 
-
-
                 start.piece = null;
                 end.piece = piece;
                 piece.square = end;
@@ -91,6 +84,7 @@ public class Chess {
                 System.out.println();
             } else {
                 System.out.println("Illegal move, try again");
+                continue;
             }
 
             if (board.inCheck(false)) {

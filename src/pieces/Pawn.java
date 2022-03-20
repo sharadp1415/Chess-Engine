@@ -12,6 +12,7 @@ import chess.Square;
 public class Pawn extends Piece {
 
     boolean moved = false;
+    boolean justMoved = false;
 
     public Pawn(boolean isWhite, Square square) {
         super(isWhite, square);
@@ -34,8 +35,22 @@ public class Pawn extends Piece {
             // check for diagonal move
             if (end.rowpos - start.rowpos == -1 && Math.abs(end.colpos - start.colpos) == 1) {
                 // check if opposing piece is preset
-                if (end.piece == null || end.piece.isWhite) {
+                if (end.piece.isWhite) {
                     return false;
+                }
+
+                if (end.piece == null) {
+                    // check for en passant
+                    /**
+                     * WORK IN PROGRESS
+                     */
+
+                    Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
+                    if (potentialPiece == null || !(potentialPiece instanceof Pawn)
+                            || !(((Pawn) potentialPiece).justMoved)
+                            || ((Pawn) potentialPiece).isWhite) {
+                        return false;
+                    }
                 }
             }
 

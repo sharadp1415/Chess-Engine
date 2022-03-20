@@ -28,8 +28,13 @@ public class King extends Piece {
             if (!this.isFirstMove)
                 return false;
 
+            // check if king is in check (can't castle then)
+            if (b.inCheck(this.isWhite))
+                return false;
+
             // white castling
             if (this.isWhite) {
+
                 // castling king side (right)
                 if ((start.colpos - end.colpos) == -2) {
                     Piece p = b.board[7][0].piece;
@@ -41,10 +46,9 @@ public class King extends Piece {
                     Rook r = (Rook) p;
                     if (!r.isFirstMove)
                         return false;
-                    
+
                     return true;
-                    
-                    
+
                 }
 
                 // castling queen side (left)
