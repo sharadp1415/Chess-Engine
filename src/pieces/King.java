@@ -37,7 +37,7 @@ public class King extends Piece {
 
                 // castling king side (right)
                 if ((start.colpos - end.colpos) == -2) {
-                    Piece p = b.board[7][0].piece;
+                    Piece p = b.board[7][7].piece;
                     // piece at end is not rook
                     if (p == null || !(p instanceof Rook))
                         return false;
@@ -47,24 +47,88 @@ public class King extends Piece {
                     if (!r.isFirstMove)
                         return false;
 
+                    // piece in between king and rook
+                    for (int i = 5; i < 7; i++)
+                        if (b.board[7][i].piece != null)
+                            return false;
+
+                    // moves rook to appropriate spot, king still moved in Chess class
+                    ((Rook) b.board[7][7].piece).isFirstMove = false;
+                    b.board[7][5].piece = b.board[7][7].piece;
+                    b.board[7][7].piece = null;
+
                     return true;
 
                 }
 
                 // castling queen side (left)
-                // if((start.colpos - end.colpos) == 2)
+                if ((start.colpos - end.colpos) == 2) {
+                    Piece p = b.board[7][0].piece;
+                    if (p == null || !(p instanceof Rook))
+                        return false;
+
+                    Rook r = (Rook) p;
+                    if (!r.isFirstMove)
+                        return false;
+
+                    for (int i = 1; i < 4; i++)
+                        if (b.board[7][i].piece != null)
+                            return false;
+
+                    ((Rook) b.board[7][0].piece).isFirstMove = false;
+                    b.board[7][3].piece = b.board[7][0].piece;
+                    b.board[7][0].piece = null;
+
+                    return true;
+
+                }
             }
 
             // black castling
             else {
                 // castling king side (right)
+                if ((start.colpos - end.colpos) == -2) {
+                    Piece p = b.board[0][7].piece;
+                    if (p == null || !(p instanceof Rook))
+                        return false;
+
+                    Rook r = (Rook) p;
+                    if (!r.isFirstMove)
+                        return false;
+
+                    for (int i = 5; i < 7; i++)
+                        if (b.board[0][i].piece != null)
+                            return false;
+
+                    ((Rook) b.board[0][7].piece).isFirstMove = false;
+                    b.board[0][5].piece = b.board[0][7].piece;
+                    b.board[0][7].piece = null;
+
+                    return true;
+                }
 
                 // castling queen side (left)
+                if ((start.colpos - end.colpos) == 2) {
+                    Piece p = b.board[0][0].piece;
+                    if (p == null || !(p instanceof Rook))
+                        return false;
+
+                    Rook r = (Rook) p;
+                    if (!r.isFirstMove)
+                        return false;
+
+                    for (int i = 1; i < 4; i++)
+                        if (b.board[0][i].piece != null)
+                            return false;
+
+                    ((Rook) b.board[0][0].piece).isFirstMove = false;
+                    b.board[0][3].piece = b.board[0][0].piece;
+                    b.board[0][0].piece = null;
+
+                    return true;
+
+                }
             }
-
-            // pieces in between king and rook
-
-            return true;
         }
 
         if (Math.abs(start.rowpos - end.rowpos) > 1 || Math.abs(start.colpos - end.colpos) > 1) {
