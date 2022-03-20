@@ -88,7 +88,7 @@ public class Chess {
                 // pawn promotion
                 if (piece instanceof Pawn) {
                     Pawn p = (Pawn) piece;
-                    if (end.rowpos == 7) { // pawn reached end
+                    if (end.rowpos == 7 || end.rowpos == 0) { // pawn reached end
                         int convertPiece = 0;
                         if (array.length > 2)
                             convertPiece = array[2].charAt(0);
