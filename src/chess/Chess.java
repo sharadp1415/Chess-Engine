@@ -68,6 +68,25 @@ public class Chess {
                 // castling check (moved to King class)
 
                 Piece capturedPiece = end.piece;
+
+                // for en passant
+                if (piece instanceof Pawn) {
+                    Piece p = (Pawn) piece;
+                    if (Math.abs(end.rowpos - start.rowpos) == 1 && Math.abs(end.colpos -
+                            start.colpos) == 1
+                            && end.piece == null) {
+                        if (piece.isWhite) {
+                            capturedPiece = board.board[end.rowpos + 1][end.colpos].piece;
+                            board.board[end.rowpos + 1][end.colpos].piece = null;
+                        } else {
+                            capturedPiece = board.board[end.rowpos - 1][end.colpos].piece;
+                            board.board[end.rowpos - 1][end.colpos].piece = null;
+                        }
+                        // board.printBoard();
+
+                    }
+                }
+
                 if (capturedPiece != null) {
                     if (capturedPiece.isWhite) {
                         board.whitePieces.remove(capturedPiece);
@@ -93,6 +112,23 @@ public class Chess {
 
             if (board.inCheckmate(false)) {
                 System.out.println("Checkmate");
+            }
+
+            // for en passant
+            for (Piece pawn : board.blackPieces) {
+                if (pawn instanceof Pawn) {
+                    ((Pawn) pawn).justMoved = false;
+                }
+            }
+
+            for (Piece pawn : board.whitePieces) {
+                if (pawn instanceof Pawn) {
+                    ((Pawn) pawn).justMoved = false;
+                }
+            }
+
+            if (piece instanceof Pawn && Math.abs(start.rowpos - end.rowpos) == 2) {
+                ((Pawn) piece).justMoved = true;
             }
 
             isWhiteTurn = !isWhiteTurn;

@@ -12,7 +12,7 @@ import chess.Square;
 public class Pawn extends Piece {
 
     boolean moved = false;
-    boolean justMoved = false;
+    public boolean justMoved = false;
 
     public Pawn(boolean isWhite, Square square) {
         super(isWhite, square);
@@ -35,7 +35,7 @@ public class Pawn extends Piece {
             // check for diagonal move
             if (end.rowpos - start.rowpos == -1 && Math.abs(end.colpos - start.colpos) == 1) {
                 // check if opposing piece is preset
-                if (end.piece.isWhite) {
+                if (end.piece != null && end.piece.isWhite) {
                     return false;
                 }
 
@@ -49,6 +49,8 @@ public class Pawn extends Piece {
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || ((Pawn) potentialPiece).isWhite) {
+                        System.out.println(potentialPiece);
+                        System.out.println("broken");
                         return false;
                     }
                 }
