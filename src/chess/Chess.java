@@ -2,7 +2,6 @@ package chess;
 
 import java.util.Scanner;
 
-import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
 
@@ -97,14 +96,13 @@ public class Chess {
                 piece.square = end;
                 System.out.println();
                 board.printBoard();
-                System.out.println();
             } else {
                 System.out.println("Illegal move, try again");
                 continue;
             }
 
             if (board.inCheckmate(!isWhiteTurn)) {
-                System.out.println("Checkmate");
+                System.out.println("\nCheckmate");
                 if (isWhiteTurn) {
                     System.out.println("White wins");
                 } else {

@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 import pieces.Bishop;
 import pieces.King;
@@ -90,6 +89,7 @@ public class Board {
             char letter = (char) (i + 97);
             System.out.print(letter + "  ");
         }
+        System.out.println();
     }
 
     // check whether white or black king is in check
