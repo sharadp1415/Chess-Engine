@@ -56,8 +56,8 @@ public class Pawn extends Piece {
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || ((Pawn) potentialPiece).isWhite) {
-                        System.out.println(potentialPiece);
-                        System.out.println("broken");
+                        // System.out.println(potentialPiece);
+                        // System.out.println("broken");
                         return false;
                     }
                 }
@@ -93,8 +93,24 @@ public class Pawn extends Piece {
                 }
             }
             if (end.rowpos - start.rowpos == 1 && Math.abs(end.colpos - start.colpos) == 1) {
-                if (end.piece == null || !end.piece.isWhite) {
+                if (end.piece != null && !end.piece.isWhite) {
                     return false;
+                }
+
+                if (end.piece == null) {
+                    // check for en passant
+                    /**
+                     * WORK IN PROGRESS
+                     */
+
+                    Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
+                    if (potentialPiece == null || !(potentialPiece instanceof Pawn)
+                            || !(((Pawn) potentialPiece).justMoved)
+                            || !((Pawn) potentialPiece).isWhite) {
+                        // System.out.println(potentialPiece);
+                        // System.out.println("broken");
+                        return false;
+                    }
                 }
             }
 
