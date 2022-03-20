@@ -24,7 +24,6 @@ public class Chess {
         String input = "";
 
         Boolean isWhiteTurn = true;
-        int moveCounter = 0;
 
         while (!input.equals("exit")) {
             if (isWhiteTurn)
@@ -32,7 +31,6 @@ public class Chess {
             else
                 System.out.print("\nBlack's Move: ");
 
-            moveCounter++;
             input = scanner.nextLine();
 
             // if one player resigns
@@ -68,7 +66,6 @@ public class Chess {
 
                 // for en passant
                 if (piece instanceof Pawn) {
-                    Piece p = (Pawn) piece;
                     if (Math.abs(end.rowpos - start.rowpos) == 1 && Math.abs(end.colpos -
                             start.colpos) == 1
                             && end.piece == null) {
@@ -110,12 +107,18 @@ public class Chess {
                 continue;
             }
 
-            if (board.inCheck(false)) {
-                System.out.println("\nCheck");
+            if (board.inCheckmate(!isWhiteTurn)) {
+                System.out.println("Checkmate");
+                if (isWhiteTurn) {
+                    System.out.println("White wins");
+                } else {
+                    System.out.println("Black wins");
+                }
+                break;
             }
 
-            if (board.inCheckmate(false)) {
-                System.out.println("Checkmate");
+            if (board.inCheck(!isWhiteTurn)) {
+                System.out.print("\nCheck");
             }
 
             // for en passant

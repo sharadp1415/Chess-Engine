@@ -22,6 +22,13 @@ public class Pawn extends Piece {
 
         // check if pawn move is valid for capturing or advancing
         if (isWhite) {
+            // check for impossible move
+            if (!((end.rowpos - start.rowpos == -2 && start.colpos - end.colpos == 0)
+                    || (end.rowpos - start.rowpos == -1 && start.colpos - end.colpos == 0)
+                    || (end.rowpos - start.rowpos == -1 && Math.abs(end.colpos - start.colpos) == 1))) {
+                return false;
+            }
+
             // check for first move if moved two spots
             if (end.rowpos - start.rowpos == -2) {
                 if (moved) {
@@ -49,8 +56,8 @@ public class Pawn extends Piece {
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || ((Pawn) potentialPiece).isWhite) {
-                        System.out.println(potentialPiece);
-                        System.out.println("broken");
+                        // System.out.println(potentialPiece);
+                        // System.out.println("broken");
                         return false;
                     }
                 }
@@ -68,6 +75,13 @@ public class Pawn extends Piece {
                 return false;
             }
         } else { // same for black
+            // check for impossible move
+            if (!((end.rowpos - start.rowpos == 2 && start.colpos - end.colpos == 0)
+                    || (end.rowpos - start.rowpos == 1 && start.colpos - end.colpos == 0)
+                    || (end.rowpos - start.rowpos == 1 && Math.abs(end.colpos - start.colpos) == 1))) {
+                return false;
+            }
+
             if (end.rowpos - start.rowpos == 2) {
                 if (moved) {
                     return false;
@@ -79,8 +93,24 @@ public class Pawn extends Piece {
                 }
             }
             if (end.rowpos - start.rowpos == 1 && Math.abs(end.colpos - start.colpos) == 1) {
-                if (end.piece == null || !end.piece.isWhite) {
+                if (end.piece != null && !end.piece.isWhite) {
                     return false;
+                }
+
+                if (end.piece == null) {
+                    // check for en passant
+                    /**
+                     * WORK IN PROGRESS
+                     */
+
+                    Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
+                    if (potentialPiece == null || !(potentialPiece instanceof Pawn)
+                            || !(((Pawn) potentialPiece).justMoved)
+                            || !((Pawn) potentialPiece).isWhite) {
+                        // System.out.println(potentialPiece);
+                        // System.out.println("broken");
+                        return false;
+                    }
                 }
             }
 
