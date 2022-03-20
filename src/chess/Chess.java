@@ -61,9 +61,6 @@ public class Chess {
             }
 
             if (piece.isValidMove(start, end, board)) {
-
-                // castling check (moved to King class)
-
                 Piece capturedPiece = end.piece;
 
                 // for en passant
@@ -80,6 +77,13 @@ public class Chess {
                         }
                         // board.printBoard();
 
+                    }
+                }
+
+                // pawn promotion
+                if(piece instanceof Pawn){
+                    if(end.rowpos == 7){ // pawn reached end
+                        
                     }
                 }
 

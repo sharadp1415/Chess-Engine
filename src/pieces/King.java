@@ -56,6 +56,7 @@ public class King extends Piece {
                     ((Rook) b.board[7][7].piece).isFirstMove = false;
                     b.board[7][5].piece = b.board[7][7].piece;
                     b.board[7][7].piece = null;
+                    this.isFirstMove = false;
                     b.board[7][5].piece.square = b.board[7][5];
 
                     return true;
@@ -79,6 +80,7 @@ public class King extends Piece {
                     ((Rook) b.board[7][0].piece).isFirstMove = false;
                     b.board[7][3].piece = b.board[7][0].piece;
                     b.board[7][0].piece = null;
+                    this.isFirstMove = false;
                     b.board[7][3].piece.square = b.board[7][3];
 
                     return true;
@@ -105,6 +107,7 @@ public class King extends Piece {
                     ((Rook) b.board[0][7].piece).isFirstMove = false;
                     b.board[0][5].piece = b.board[0][7].piece;
                     b.board[0][7].piece = null;
+                    this.isFirstMove = false;
                     b.board[0][5].piece.square = b.board[0][5];
 
                     return true;
@@ -127,6 +130,7 @@ public class King extends Piece {
                     ((Rook) b.board[0][0].piece).isFirstMove = false;
                     b.board[0][3].piece = b.board[0][0].piece;
                     b.board[0][0].piece = null;
+                    this.isFirstMove = false;
                     b.board[0][3].piece.square = b.board[0][3];
 
                     return true;
