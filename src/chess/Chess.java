@@ -93,7 +93,6 @@ public class Chess {
                         if (array.length > 2)
                             convertPiece = array[2].charAt(0);
 
-                        Square s = end;
                         boolean iW = piece.isWhite;
 
                         if (p.isWhite)
@@ -104,22 +103,22 @@ public class Chess {
                         switch (convertPiece) {
                             // convert to knight
                             case 78:
-                                piece = new Knight(iW, s);
+                                piece = new Knight(iW, end);
                                 break;
 
                             // convert to rook
                             case 82:
-                                piece = new Rook(iW, s);
+                                piece = new Rook(iW, end);
                                 break;
 
                             // convert to bishop
                             case 66:
-                                piece = new Bishop(iW, s);
+                                piece = new Bishop(iW, end);
                                 break;
 
                             // convert to queen
                             default:
-                                piece = new Queen(iW, s);
+                                piece = new Queen(iW, end);
                                 break;
                         }
                         
