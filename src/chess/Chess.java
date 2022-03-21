@@ -18,6 +18,11 @@ import pieces.Rook;
  * En passant in pawn class is work in progress may break code, comment out if
  * does
  */
+
+/**
+ * Main class
+ * INCLUDE MORE INFO
+ */
 public class Chess {
 
     public static void main(String[] args) {
@@ -121,7 +126,7 @@ public class Chess {
                                 piece = new Queen(iW, end);
                                 break;
                         }
-                        
+
                         if (p.isWhite)
                             board.whitePieces.add(piece);
                         else

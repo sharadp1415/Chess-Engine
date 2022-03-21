@@ -11,7 +11,7 @@ import chess.Square;
 
 public class Bishop extends Piece {
 
-    public Bishop(boolean isWhite, Square square) {
+     public Bishop(boolean isWhite, Square square) {
         super(isWhite, square);
     }
 
@@ -133,4 +133,5 @@ public class Bishop extends Piece {
     public String toString() {
         return isWhite ? "wB " : "bB ";
     }
+
 }
