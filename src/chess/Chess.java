@@ -25,6 +25,11 @@ import pieces.Rook;
  */
 public class Chess {
 
+    /**
+     * Main chess runner that runs until a user wins, draws, or resigns
+     * 
+     * @param args  main arguments (unused)
+     */
     public static void main(String[] args) {
         Board board = new Board();
         board.printBoard();

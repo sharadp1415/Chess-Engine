@@ -11,9 +11,22 @@ import chess.Square;
 
 public class Pawn extends Piece {
 
+    /**
+     * False if Pawn has never moved, true otherwise, used to determine if Pawn is allowed to move twice on its first play
+     */
     boolean moved = false;
+
+    /**
+     * Determines if Pawn has just moved, used for ______________
+     */
     public boolean justMoved = false;
 
+    /**
+     * 2-arg constructor for Pawn class
+     * 
+     * @param isWhite If piece is white or black
+     * @param square  Square piece resides on
+     */
     public Pawn(boolean isWhite, Square square) {
         super(isWhite, square);
     }

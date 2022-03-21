@@ -10,8 +10,17 @@ import chess.Square;
  */
 
 public class King extends Piece {
+    /**
+     * True if King has moved, false otherwise
+     */
     boolean isFirstMove;
 
+    /**
+     * 2-arg constructor for King class
+     * 
+     * @param isWhite If piece is white or black
+     * @param square  Square piece resides on
+     */
     public King(boolean isWhite, Square square) {
         super(isWhite, square);
         isFirstMove = true;

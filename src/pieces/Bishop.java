@@ -11,7 +11,13 @@ import chess.Square;
 
 public class Bishop extends Piece {
 
-     public Bishop(boolean isWhite, Square square) {
+    /**
+     * 2-arg constructor for Bishop class
+     * 
+     * @param isWhite If piece is white or black
+     * @param square  Square piece resides on
+     */
+    public Bishop(boolean isWhite, Square square) {
         super(isWhite, square);
     }
 

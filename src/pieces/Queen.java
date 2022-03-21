@@ -10,6 +10,12 @@ import chess.Square;
  */
 
 public class Queen extends Piece {
+    /**
+     * 2-arg constructor for Queen class
+     * 
+     * @param isWhite If piece is white or black
+     * @param square  Square piece resides on
+     */
     public Queen(boolean isWhite, Square square) {
         super(isWhite, square);
     }

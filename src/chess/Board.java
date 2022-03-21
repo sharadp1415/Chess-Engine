@@ -17,7 +17,7 @@ import pieces.Rook;
 
 /**
  * Class that represents the board that the game is being played on
- * INCLUDE MORE INFO 
+ * INCLUDE MORE INFO
  */
 public class Board {
     /**
@@ -25,7 +25,14 @@ public class Board {
      */
     public Square[][] board;
 
+    /**
+     * Set of all black Pieces that are in play (not captured)
+     */
     public HashSet<Piece> blackPieces;
+
+    /**
+     * Set of all white Pieces that are in play (not captured)
+     */
     public HashSet<Piece> whitePieces;
 
     /**
@@ -110,8 +117,9 @@ public class Board {
 
     /**
      * Checks if black or white king is in check
-     * @param isWhite   if king being checked is white
-     * @return          true if specific colored king is in check, false otherwise 
+     * 
+     * @param isWhite if king being checked is white
+     * @return true if specific colored king is in check, false otherwise
      */
     public boolean inCheck(boolean isWhite) {
         HashSet<Piece> oppPieces = null;
@@ -146,8 +154,9 @@ public class Board {
 
     /**
      * Checks if black or white king is in checkmate
-     * @param isWhite   if king being checkmated is white
-     * @return          true if specific colored king is in checkmate, false otherwise 
+     * 
+     * @param isWhite if king being checkmated is white
+     * @return true if specific colored king is in checkmate, false otherwise
      */
     public boolean inCheckmate(boolean isWhite) {
         // check if king is in check

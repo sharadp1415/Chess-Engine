@@ -11,8 +11,17 @@ import chess.Square;
 
 public class Rook extends Piece {
 
+    /**
+     * True if Rook has moved, false otherwise
+     */
     boolean isFirstMove;
 
+    /**
+     * 2-arg constructor for Rook class
+     * 
+     * @param isWhite If piece is white or black
+     * @param square  Square piece resides on
+     */
     public Rook(boolean isWhite, Square square) {
         super(isWhite, square);
         isFirstMove = true;
