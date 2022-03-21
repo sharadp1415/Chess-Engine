@@ -2,8 +2,12 @@ package chess;
 
 import java.util.Scanner;
 
+import pieces.Bishop;
+import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
 
 /**
  * @author Naman Bajaj, Sharad Prasad
@@ -81,10 +85,49 @@ public class Chess {
                 }
 
                 // pawn promotion
-                if(piece instanceof Pawn){
-                    if(end.rowpos == 7){ // pawn reached end
-                        
+                if (piece instanceof Pawn) {
+                    Pawn p = (Pawn) piece;
+                    if (end.rowpos == 7 || end.rowpos == 0) { // pawn reached end
+                        int convertPiece = 0;
+                        if (array.length > 2)
+                            convertPiece = array[2].charAt(0);
+
+                        boolean iW = piece.isWhite;
+
+                        if (p.isWhite)
+                            board.whitePieces.remove(piece);
+                        else
+                            board.blackPieces.remove(piece);
+
+                        switch (convertPiece) {
+                            // convert to knight
+                            case 78:
+                                piece = new Knight(iW, end);
+                                break;
+
+                            // convert to rook
+                            case 82:
+                                piece = new Rook(iW, end);
+                                break;
+
+                            // convert to bishop
+                            case 66:
+                                piece = new Bishop(iW, end);
+                                break;
+
+                            // convert to queen
+                            default:
+                                piece = new Queen(iW, end);
+                                break;
+                        }
+
+                        if (p.isWhite)
+                            board.whitePieces.add(piece);
+                        else
+                            board.blackPieces.add(piece);
+
                     }
+
                 }
 
                 if (capturedPiece != null) {
