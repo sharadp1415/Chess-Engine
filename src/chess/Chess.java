@@ -3,7 +3,6 @@ package chess;
 import java.util.Scanner;
 
 import pieces.Bishop;
-import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
@@ -21,7 +20,8 @@ import pieces.Rook;
 
 /**
  * Main class
- * INCLUDE MORE INFO
+ * <p>
+ * Runs a Chess game until a user wins, draws, or resigns
  */
 public class Chess {
 

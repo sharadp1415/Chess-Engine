@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 import pieces.Bishop;
 import pieces.King;
@@ -17,7 +16,9 @@ import pieces.Rook;
 
 /**
  * Class that represents the board that the game is being played on
- * INCLUDE MORE INFO
+ * <p>
+ * Board is an 8x8 2D array of type Square that contains all present pieces on
+ * the board
  */
 public class Board {
     /**
@@ -56,7 +57,7 @@ public class Board {
     }
 
     /**
-     * Initializes board and sets them to their default positions
+     * Initializes board and sets pieces to their default positions
      */
     public void initializeBoard() {
         for (int i = 0; i < 8; i++) {
@@ -119,7 +120,7 @@ public class Board {
      * Checks if black or white king is in check
      * 
      * @param isWhite if king being checked is white
-     * @return true if specific colored king is in check, false otherwise
+     * @return true if king of a specific color is in check, false otherwise
      */
     public boolean inCheck(boolean isWhite) {
         HashSet<Piece> oppPieces = null;
