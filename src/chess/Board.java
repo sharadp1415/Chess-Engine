@@ -14,12 +14,31 @@ import pieces.Rook;
  * @author Naman Bajaj, Sharad Prasad
  */
 
+/**
+ * Class that represents the board that the game is being played on
+ * <p>
+ * Board is an 8x8 2D array of type Square that contains all present pieces on
+ * the board
+ */
 public class Board {
+    /**
+     * 2D square array that represents the board
+     */
     public Square[][] board;
-    // might add HashSets for set of black pieces and set of white pieces
+
+    /**
+     * Set of all black Pieces that are in play (not captured)
+     */
     public HashSet<Piece> blackPieces;
+
+    /**
+     * Set of all white Pieces that are in play (not captured)
+     */
     public HashSet<Piece> whitePieces;
 
+    /**
+     * Default board constructor
+     */
     public Board() {
         board = new Square[8][8];
         blackPieces = new HashSet<>();
@@ -37,6 +56,9 @@ public class Board {
         initializeBoard();
     }
 
+    /**
+     * Initializes board and sets pieces to their default positions
+     */
     public void initializeBoard() {
         for (int i = 0; i < 8; i++) {
             board[1][i].piece = new Pawn(false, board[1][i]);
@@ -70,6 +92,9 @@ public class Board {
         }
     }
 
+    /**
+     * Prints the board as it currently is
+     */
     public void printBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -92,7 +117,12 @@ public class Board {
         System.out.println();
     }
 
-    // check whether white or black king is in check
+    /**
+     * Checks if black or white king is in check
+     * 
+     * @param isWhite if king being checked is white
+     * @return true if king of a specific color is in check, false otherwise
+     */
     public boolean inCheck(boolean isWhite) {
         HashSet<Piece> oppPieces = null;
         Square kingPosition = null;
@@ -124,6 +154,12 @@ public class Board {
         return false;
     }
 
+    /**
+     * Checks if black or white king is in checkmate
+     * 
+     * @param isWhite if king being checkmated is white
+     * @return true if specific colored king is in checkmate, false otherwise
+     */
     public boolean inCheckmate(boolean isWhite) {
         // check if king is in check
         if (!inCheck(isWhite)) {

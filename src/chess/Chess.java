@@ -17,8 +17,19 @@ import pieces.Rook;
  * En passant in pawn class is work in progress may break code, comment out if
  * does
  */
+
+/**
+ * Main class
+ * <p>
+ * Runs a Chess game until a user wins, draws, or resigns
+ */
 public class Chess {
 
+    /**
+     * Main chess runner that runs until a user wins, draws, or resigns
+     * 
+     * @param args  main arguments (unused)
+     */
     public static void main(String[] args) {
         Board board = new Board();
         board.printBoard();
