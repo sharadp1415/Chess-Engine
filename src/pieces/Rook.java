@@ -28,6 +28,7 @@ public class Rook extends Piece {
     }
 
     public boolean isValidMove(Square start, Square end, Board b) {
+        // check if piece moved at all
         if (start.equals(end))
             return false;
 

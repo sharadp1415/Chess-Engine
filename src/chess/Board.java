@@ -234,7 +234,7 @@ public class Board {
             HashSet<Square> squaresBetween = attackPiece.squaresBetween(attackPiece.square, kingPosition, this);
             for (Square square : squaresBetween) {
                 for (Piece ownPiece : ownPieces) {
-                    if (ownPiece.isValidMove(ownPiece.square, square, this)) {
+                    if (!(ownPiece instanceof King) && ownPiece.isValidMove(ownPiece.square, square, this)) {
                         return false;
                     }
                 }
