@@ -14,11 +14,6 @@ import pieces.Rook;
  */
 
 /**
- * En passant in pawn class is work in progress may break code, comment out if
- * does
- */
-
-/**
  * Main class
  * <p>
  * Runs a Chess game until a user wins, draws, or resigns

@@ -17,7 +17,7 @@ public class Pawn extends Piece {
     boolean moved = false;
 
     /**
-     * Determines if Pawn has just moved, used for ______________
+     * Determines if Pawn has just moved, used for en passant
      */
     public boolean justMoved = false;
 
