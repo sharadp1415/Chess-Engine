@@ -33,6 +33,7 @@ public class Chess {
         String input = "";
 
         Boolean isWhiteTurn = true;
+        Boolean drawOffered = false;
 
         while (!input.equals("exit")) {
             if (isWhiteTurn)
@@ -55,17 +56,7 @@ public class Chess {
 
             // check for draw offered
             if (array.length > 2 && array[2].equals("draw?")) {
-                System.out.println();
-                board.printBoard();
-
-                if (isWhiteTurn)
-                    System.out.print("\nBlack's Move: ");
-                else
-                    System.out.print("\nWhite's Move: ");
-
-                while (!scanner.nextLine().equals("draw"))
-                    System.out.println("Illegal move, try again");
-                break;
+                drawOffered = true;
             }
 
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
@@ -190,6 +181,17 @@ public class Chess {
 
             if (piece instanceof Pawn && Math.abs(start.rowpos - end.rowpos) == 2) {
                 ((Pawn) piece).justMoved = true;
+            }
+
+            if(drawOffered){
+                if (isWhiteTurn)
+                    System.out.print("\nBlack's Move: ");
+                else
+                    System.out.print("\nWhite's Move: ");
+
+                while (!scanner.nextLine().equals("draw"))
+                    System.out.println("Illegal move, try again");
+                break;
             }
 
             isWhiteTurn = !isWhiteTurn;
