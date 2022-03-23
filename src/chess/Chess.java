@@ -55,6 +55,14 @@ public class Chess {
 
             // check for draw offered
             if (array.length > 2 && array[2].equals("draw?")) {
+                System.out.println();
+                board.printBoard();
+
+                if (isWhiteTurn)
+                    System.out.print("\nBlack's Move: ");
+                else
+                    System.out.print("\nWhite's Move: ");
+
                 while (!scanner.nextLine().equals("draw"))
                     System.out.println("Illegal move, try again");
                 break;
