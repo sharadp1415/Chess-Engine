@@ -145,8 +145,6 @@ public class Board {
 
         for (Piece piece : oppPieces) {
             if (piece.isValidMove(piece.square, kingPosition, this)) {
-                // System.out.println("\ncheck\tattacking piece: " + piece + "\tKing Position: "
-                // + kingPosition);
                 return true;
             }
         }
@@ -165,8 +163,6 @@ public class Board {
         if (!inCheck(isWhite)) {
             return false;
         }
-
-        // System.out.println("cleared1");
 
         HashSet<Piece> oppPieces = null;
         HashSet<Piece> ownPieces = null;
@@ -198,22 +194,11 @@ public class Board {
                         && kingPosition.colpos + j < 8) {
                     Square end = board[kingPosition.rowpos + i][kingPosition.colpos + j];
                     if (kingPosition.piece.isValidMove(kingPosition, end, this)) {
-                        // System.out.println("King Position: " + kingPosition + "\tPossible Square: " +
-                        // end);
                         return false;
                     }
                 }
             }
         }
-
-        // System.out.println("cleared2");
-
-        // need to add option for pieces to block
-        // introduce a set of all pieces checking the king
-        // iterate through the set and for each piece, develop another set of all
-        // squares in between (implemented in each Piece subclass)
-        // return whether the set is not empty, signifying that a piece cannot be
-        // blocked
 
         HashSet<Piece> attackPieces = new HashSet<>();
 
@@ -225,7 +210,6 @@ public class Board {
 
         // if double check, checkmate since possible king moves are already checked
         if (attackPieces.size() > 1) {
-            // System.out.println("Double Check");
             return true;
         }
 
@@ -241,17 +225,12 @@ public class Board {
             }
         }
 
-        // System.out.println("cleared3");
-
         // check if capture attacking piece
         for (Piece attackPiece : attackPieces) {
             for (Piece ownPiece : ownPieces) {
-                // for (Iterator<Piece> iterator = ownPieces.iterator(); iterator.hasNext();) {
-                // Piece ownPiece = iterator.next();
                 if (ownPiece instanceof King) {
                     continue;
                 }
-                // System.out.println(ownPiece);
                 if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, this)) {
                     System.out.println("piece that can capture: " + ownPiece);
                     return false;

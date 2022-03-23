@@ -23,7 +23,7 @@ public class Chess {
     /**
      * Main chess runner that runs until a user wins, draws, or resigns
      * 
-     * @param args  main arguments (unused)
+     * @param args main arguments (unused)
      */
     public static void main(String[] args) {
         Board board = new Board();
@@ -60,7 +60,6 @@ public class Chess {
                 break;
             }
 
-            // System.out.println(8 - (array[0].charAt(0) - 97));
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
