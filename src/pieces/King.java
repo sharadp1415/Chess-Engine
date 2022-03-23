@@ -166,7 +166,6 @@ public class King extends Piece {
 
         for (Piece piece : oppPieces) {
             Piece temp = end.piece;
-            // end.piece = null;
             end.piece = this;
             this.square = end;
             start.piece = null;

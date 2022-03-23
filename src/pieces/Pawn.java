@@ -12,7 +12,8 @@ import chess.Square;
 public class Pawn extends Piece {
 
     /**
-     * False if Pawn has never moved, true otherwise, used to determine if Pawn is allowed to move twice on its first play
+     * False if Pawn has never moved, true otherwise, used to determine if Pawn is
+     * allowed to move twice on its first play
      */
     boolean moved = false;
 
@@ -61,16 +62,11 @@ public class Pawn extends Piece {
 
                 if (end.piece == null) {
                     // check for en passant
-                    /**
-                     * WORK IN PROGRESS
-                     */
 
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || ((Pawn) potentialPiece).isWhite) {
-                        // System.out.println(potentialPiece);
-                        // System.out.println("broken");
                         return false;
                     }
                 }
@@ -84,7 +80,6 @@ public class Pawn extends Piece {
             }
 
             if (end.rowpos - start.rowpos != -1 && end.rowpos - start.rowpos != -2) {
-                // System.out.println("error: " + (end.xpos) + " " + start.xpos);
                 return false;
             }
         } else { // same for black
@@ -112,16 +107,11 @@ public class Pawn extends Piece {
 
                 if (end.piece == null) {
                     // check for en passant
-                    /**
-                     * WORK IN PROGRESS
-                     */
 
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || !((Pawn) potentialPiece).isWhite) {
-                        // System.out.println(potentialPiece);
-                        // System.out.println("broken");
                         return false;
                     }
                 }
