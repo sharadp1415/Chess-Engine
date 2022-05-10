@@ -1,8 +1,11 @@
 package pieces;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 import chess.Board;
+import chess.Chess;
+import chess.Move;
 import chess.Square;
 
 /**
@@ -32,7 +35,10 @@ public class Pawn extends Piece {
         super(isWhite, square);
     }
 
-    public boolean isValidMove(Square start, Square end, Board b) {
+    public boolean isValidMove(Square start, Square end, Chess game) {
+
+        Board b = game.board;
+        Stack<Move> moveStack = game.moveStack;
 
         // check if pawn move is valid for capturing or advancing
         if (isWhite) {
@@ -64,6 +70,7 @@ public class Pawn extends Piece {
                     // check for en passant
 
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
+
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || !(((Pawn) potentialPiece).justMoved)
                             || ((Pawn) potentialPiece).isWhite) {
@@ -175,7 +182,11 @@ public class Pawn extends Piece {
     }
 
     public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
-        return new HashSet<>();
+        HashSet<Square> squares = new HashSet<>();
+        if (Math.abs(start.rowpos - end.rowpos) == 2) {
+            squares.add(b.board[(start.rowpos + end.rowpos) / 2][start.colpos]);
+        }
+        return squares;
     }
 
     public String toString() {

@@ -3,6 +3,7 @@ package pieces;
 import java.util.HashSet;
 
 import chess.Board;
+import chess.Chess;
 import chess.Square;
 
 /**
@@ -30,7 +31,7 @@ public abstract class Piece {
      * 2-arg constructor for Piece
      * 
      * @param isWhite whether color of piece is white
-     * @param square square that piece is on
+     * @param square  square that piece is on
      */
     public Piece(boolean isWhite, Square square) {
         this.isTaken = false;
@@ -49,18 +50,18 @@ public abstract class Piece {
      * Checks if move made by user is valid according to rules of Piece being moved
      * 
      * @param start Starting square
-     * @param end Ending square
-     * @param b Board being played on
+     * @param end   Ending square
+     * @param b     Board being played on
      * @return True if valid move, false otherwise
      */
-    public abstract boolean isValidMove(Square start, Square end, Board b);
+    public abstract boolean isValidMove(Square start, Square end, Chess game);
 
     /**
      * Returns set of squares in between 2 specific squares
      * 
      * @param start Starting square
-     * @param end Ending square
-     * @param b Board being played on
+     * @param end   Ending square
+     * @param b     Board being played on
      * @return HashSet of squares in between start and
      */
     public abstract HashSet<Square> squaresBetween(Square start, Square end, Board b);

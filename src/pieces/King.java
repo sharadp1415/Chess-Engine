@@ -3,6 +3,7 @@ package pieces;
 import java.util.HashSet;
 
 import chess.Board;
+import chess.Chess;
 import chess.Square;
 
 /**
@@ -26,7 +27,9 @@ public class King extends Piece {
         isFirstMove = true;
     }
 
-    public boolean isValidMove(Square start, Square end, Board b) {
+    public boolean isValidMove(Square start, Square end, Chess game) {
+        Board b = game.board;
+
         if (start.equals(end)) {
             return false;
         }
@@ -169,7 +172,7 @@ public class King extends Piece {
             end.piece = this;
             this.square = end;
             start.piece = null;
-            if (piece.isValidMove(piece.square, end, b)) {
+            if (piece.isValidMove(piece.square, end, game)) {
                 start.piece = this;
                 this.square = start;
                 end.piece = temp;

@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 import pieces.Bishop;
 import pieces.Knight;
@@ -20,20 +21,23 @@ import pieces.Rook;
  */
 public class Chess {
 
-    /**
-     * Main chess runner that runs until a user wins, draws, or resigns
-     * 
-     * @param args main arguments (unused)
-     */
-    public static void main(String[] args) {
-        Board board = new Board();
+    public Board board;
+    public Stack<Move> moveStack;
+    Boolean isWhiteTurn;
+    Boolean drawOffered;
+
+    public Chess() {
+        board = new Board(this);
+        moveStack = new Stack<>();
+        isWhiteTurn = true;
+        drawOffered = false;
+    }
+
+    public void playGame() {
         board.printBoard();
 
         Scanner scanner = new Scanner(System.in);
         String input = "";
-
-        Boolean isWhiteTurn = true;
-        Boolean drawOffered = false;
 
         while (!input.equals("exit")) {
             if (isWhiteTurn)
@@ -62,13 +66,14 @@ public class Chess {
             Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
+            Move move = new Move(start, end, isWhiteTurn);
 
             if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
                 System.out.print("Illegal move, try again");
                 continue;
             }
 
-            if (piece.isValidMove(start, end, board)) {
+            if (piece.isValidMove(start, end, this)) {
                 Piece capturedPiece = end.piece;
 
                 // for en passant
@@ -183,7 +188,7 @@ public class Chess {
                 ((Pawn) piece).justMoved = true;
             }
 
-            if(drawOffered){
+            if (drawOffered) {
                 if (isWhiteTurn)
                     System.out.print("\nBlack's Move: ");
                 else
@@ -198,5 +203,15 @@ public class Chess {
         }
 
         scanner.close();
+    }
+
+    /**
+     * Main chess runner that runs until a user wins, draws, or resigns
+     * 
+     * @param args main arguments (unused)
+     */
+    public static void main(String[] args) {
+        Chess chessGame = new Chess();
+        chessGame.playGame();
     }
 }

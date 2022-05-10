@@ -36,10 +36,15 @@ public class Board {
      */
     public HashSet<Piece> whitePieces;
 
+    public Chess game;
+
     /**
      * Default board constructor
      */
-    public Board() {
+    public Board(Chess game) {
+
+        this.game = game;
+
         board = new Square[8][8];
         blackPieces = new HashSet<>();
         whitePieces = new HashSet<>();
@@ -144,7 +149,7 @@ public class Board {
         }
 
         for (Piece piece : oppPieces) {
-            if (piece.isValidMove(piece.square, kingPosition, this)) {
+            if (piece.isValidMove(piece.square, kingPosition, game)) {
                 return true;
             }
         }
@@ -193,7 +198,7 @@ public class Board {
                 if (kingPosition.rowpos + i > -1 && kingPosition.rowpos + i < 8 && kingPosition.colpos + j > -1
                         && kingPosition.colpos + j < 8) {
                     Square end = board[kingPosition.rowpos + i][kingPosition.colpos + j];
-                    if (kingPosition.piece.isValidMove(kingPosition, end, this)) {
+                    if (kingPosition.piece.isValidMove(kingPosition, end, game)) {
                         return false;
                     }
                 }
@@ -203,7 +208,7 @@ public class Board {
         HashSet<Piece> attackPieces = new HashSet<>();
 
         for (Piece piece : oppPieces) {
-            if (piece.isValidMove(piece.square, kingPosition, this)) {
+            if (piece.isValidMove(piece.square, kingPosition, game)) {
                 attackPieces.add(piece);
             }
         }
@@ -218,7 +223,7 @@ public class Board {
             HashSet<Square> squaresBetween = attackPiece.squaresBetween(attackPiece.square, kingPosition, this);
             for (Square square : squaresBetween) {
                 for (Piece ownPiece : ownPieces) {
-                    if (!(ownPiece instanceof King) && ownPiece.isValidMove(ownPiece.square, square, this)) {
+                    if (!(ownPiece instanceof King) && ownPiece.isValidMove(ownPiece.square, square, game)) {
                         return false;
                     }
                 }
@@ -231,14 +236,14 @@ public class Board {
                 if (ownPiece instanceof King) {
                     continue;
                 }
-                if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, this)) {
+                if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, game)) {
                     System.out.println("piece that can capture: " + ownPiece);
                     return false;
                 }
             }
 
             Piece king = kingPosition.piece;
-            if (king.isValidMove(king.square, attackPiece.square, this)) {
+            if (king.isValidMove(king.square, attackPiece.square, game)) {
                 System.out.println("piece that can capture: " + king);
                 return false;
             }

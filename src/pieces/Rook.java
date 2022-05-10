@@ -3,6 +3,7 @@ package pieces;
 import java.util.HashSet;
 
 import chess.Board;
+import chess.Chess;
 import chess.Square;
 
 /**
@@ -27,7 +28,9 @@ public class Rook extends Piece {
         isFirstMove = true;
     }
 
-    public boolean isValidMove(Square start, Square end, Board b) {
+    public boolean isValidMove(Square start, Square end, Chess game) {
+        Board b = game.board;
+
         // check if piece moved at all
         if (start.equals(end))
             return false;

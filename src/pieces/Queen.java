@@ -3,6 +3,7 @@ package pieces;
 import java.util.HashSet;
 
 import chess.Board;
+import chess.Chess;
 import chess.Square;
 
 /**
@@ -20,7 +21,9 @@ public class Queen extends Piece {
         super(isWhite, square);
     }
 
-    public boolean isValidMove(Square start, Square end, Board b) {
+    public boolean isValidMove(Square start, Square end, Chess game) {
+        Board b = game.board;
+
         if (start.equals(end))
             return false;
 
