@@ -171,23 +171,6 @@ public class Chess {
                 System.out.print("\nCheck");
             }
 
-            // for en passant
-            for (Piece pawn : board.blackPieces) {
-                if (pawn instanceof Pawn) {
-                    ((Pawn) pawn).justMoved = false;
-                }
-            }
-
-            for (Piece pawn : board.whitePieces) {
-                if (pawn instanceof Pawn) {
-                    ((Pawn) pawn).justMoved = false;
-                }
-            }
-
-            if (piece instanceof Pawn && Math.abs(start.rowpos - end.rowpos) == 2) {
-                ((Pawn) piece).justMoved = true;
-            }
-
             if (drawOffered) {
                 if (isWhiteTurn)
                     System.out.print("\nBlack's Move: ");
@@ -198,6 +181,9 @@ public class Chess {
                     System.out.println("Illegal move, try again");
                 break;
             }
+
+            // add move to stack
+            moveStack.add(new Move(start, end, isWhiteTurn));
 
             isWhiteTurn = !isWhiteTurn;
         }

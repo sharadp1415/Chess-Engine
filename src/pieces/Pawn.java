@@ -72,7 +72,8 @@ public class Pawn extends Piece {
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
 
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
-                            || !(((Pawn) potentialPiece).justMoved)
+                            || moveStack.isEmpty()
+                            || moveStack.peek().movingPiece == potentialPiece
                             || ((Pawn) potentialPiece).isWhite) {
                         return false;
                     }
@@ -117,7 +118,8 @@ public class Pawn extends Piece {
 
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
-                            || !(((Pawn) potentialPiece).justMoved)
+                            || moveStack.isEmpty()
+                            || moveStack.peek().movingPiece == potentialPiece
                             || !((Pawn) potentialPiece).isWhite) {
                         return false;
                     }
