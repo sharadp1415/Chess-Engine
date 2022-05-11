@@ -13,11 +13,6 @@ import chess.Square;
 public class Rook extends Piece {
 
     /**
-     * True if Rook has moved, false otherwise
-     */
-    boolean isFirstMove;
-
-    /**
      * 2-arg constructor for Rook class
      * 
      * @param isWhite If piece is white or black
@@ -25,7 +20,6 @@ public class Rook extends Piece {
      */
     public Rook(boolean isWhite, Square square) {
         super(isWhite, square);
-        isFirstMove = true;
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -87,7 +81,6 @@ public class Rook extends Piece {
         if (b.inCheck(piece.isWhite)) {
             output = false;
         } else {
-            isFirstMove = false;
             output = true;
         }
 
