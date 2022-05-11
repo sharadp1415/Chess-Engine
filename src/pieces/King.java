@@ -83,7 +83,7 @@ public class King extends Piece {
                         return false;
 
                     Rook r = (Rook) p;
-                    if (!r.isFirstMove)
+                    if (r.moved)
                         return false;
 
                     for (int i = 1; i < 4; i++)
@@ -110,7 +110,7 @@ public class King extends Piece {
                         return false;
 
                     Rook r = (Rook) p;
-                    if (!r.isFirstMove)
+                    if (r.moved)
                         return false;
 
                     for (int i = 5; i < 7; i++)
@@ -133,7 +133,7 @@ public class King extends Piece {
                         return false;
 
                     Rook r = (Rook) p;
-                    if (!r.isFirstMove)
+                    if (r.moved)
                         return false;
 
                     for (int i = 1; i < 4; i++)
