@@ -237,14 +237,12 @@ public class Board {
                     continue;
                 }
                 if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, game)) {
-                    System.out.println("piece that can capture: " + ownPiece);
                     return false;
                 }
             }
 
             Piece king = kingPosition.piece;
             if (king.isValidMove(king.square, attackPiece.square, game)) {
-                System.out.println("piece that can capture: " + king);
                 return false;
             }
         }
