@@ -141,35 +141,39 @@ public class Pawn extends Piece {
         // and revert back)
         boolean output;
         Piece piece = start.piece;
-        Piece capturedPiece = end.piece;
-        if (capturedPiece != null) {
-            if (capturedPiece.isWhite) {
-                b.whitePieces.remove(capturedPiece);
-            } else {
-                b.blackPieces.remove(capturedPiece);
-            }
-        }
-        start.piece = null;
-        end.piece = piece;
-        piece.square = end;
-        // capturedPiece.square = null;
+        Move move = new Move(start, end, isWhite);
+        game.performMove(move);
+        // Piece capturedPiece = end.piece;
+        // if (capturedPiece != null) {
+        // if (capturedPiece.isWhite) {
+        // b.whitePieces.remove(capturedPiece);
+        // } else {
+        // b.blackPieces.remove(capturedPiece);
+        // }
+        // }
+        // start.piece = null;
+        // end.piece = piece;
+        // piece.square = end;
+        // // capturedPiece.square = null;
         if (b.inCheck(piece.isWhite)) {
             output = false;
         } else {
             output = true;
         }
 
-        start.piece = piece;
-        piece.square = start;
-        end.piece = capturedPiece;
-        // capturedPiece.square = end;
-        if (capturedPiece != null) {
-            if (capturedPiece.isWhite) {
-                b.whitePieces.add(capturedPiece);
-            } else {
-                b.blackPieces.add(capturedPiece);
-            }
-        }
+        // start.piece = piece;
+        // piece.square = start;
+        // end.piece = capturedPiece;
+        // // capturedPiece.square = end;
+        // if (capturedPiece != null) {
+        // if (capturedPiece.isWhite) {
+        // b.whitePieces.add(capturedPiece);
+        // } else {
+        // b.blackPieces.add(capturedPiece);
+        // }
+        // }
+
+        game.revertMove(move);
 
         // if (output == true) {
         // moved = true;
