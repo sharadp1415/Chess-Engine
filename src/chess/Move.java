@@ -7,11 +7,21 @@ public class Move {
     public Square end;
     public boolean whiteTurn;
     public Piece movingPiece;
+    public Piece capturedPiece;
+    public int promotion;
+    public Piece promotedPiece;
+    public boolean isPromotion;
+    public boolean piecePreviouslyMoved;
+    // public boolean isCastling;
 
     public Move(Square start, Square end, boolean whiteTurn) {
         this.start = start;
         this.end = end;
         this.whiteTurn = whiteTurn;
         this.movingPiece = start.piece;
+        capturedPiece = null;
+        promotion = 0;
+        promotedPiece = null;
+        piecePreviouslyMoved = movingPiece.moved;
     }
 }

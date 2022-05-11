@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import pieces.Bishop;
+import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
 import pieces.Piece;
@@ -56,6 +57,14 @@ public class Chess {
                 break;
             }
 
+            if (input.equals("undo")) {
+                revertMove(moveStack.pop());
+                isWhiteTurn = !isWhiteTurn;
+                System.out.println();
+                board.printBoard();
+                continue;
+            }
+
             String[] array = input.split(" ");
 
             // check for draw offered
@@ -67,6 +76,10 @@ public class Chess {
             Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
             Piece piece = start.piece;
             Move move = new Move(start, end, isWhiteTurn);
+            if (array.length > 2) {
+                int convertPiece = array[2].charAt(0);
+                move.promotion = convertPiece;
+            }
 
             if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
                 System.out.print("Illegal move, try again");
@@ -74,82 +87,9 @@ public class Chess {
             }
 
             if (piece.isValidMove(start, end, this)) {
-                Piece capturedPiece = end.piece;
-
-                // for en passant
-                if (piece instanceof Pawn) {
-                    if (Math.abs(end.rowpos - start.rowpos) == 1 && Math.abs(end.colpos -
-                            start.colpos) == 1
-                            && end.piece == null) {
-                        if (piece.isWhite) {
-                            capturedPiece = board.board[end.rowpos + 1][end.colpos].piece;
-                            board.board[end.rowpos + 1][end.colpos].piece = null;
-                        } else {
-                            capturedPiece = board.board[end.rowpos - 1][end.colpos].piece;
-                            board.board[end.rowpos - 1][end.colpos].piece = null;
-                        }
-                        // board.printBoard();
-
-                    }
-                }
-
-                // pawn promotion
-                if (piece instanceof Pawn) {
-                    Pawn p = (Pawn) piece;
-                    if (end.rowpos == 7 || end.rowpos == 0) { // pawn reached end
-                        int convertPiece = 0;
-                        if (array.length > 2)
-                            convertPiece = array[2].charAt(0);
-
-                        boolean iW = piece.isWhite;
-
-                        if (p.isWhite)
-                            board.whitePieces.remove(piece);
-                        else
-                            board.blackPieces.remove(piece);
-
-                        switch (convertPiece) {
-                            // convert to knight
-                            case 78:
-                                piece = new Knight(iW, end);
-                                break;
-
-                            // convert to rook
-                            case 82:
-                                piece = new Rook(iW, end);
-                                break;
-
-                            // convert to bishop
-                            case 66:
-                                piece = new Bishop(iW, end);
-                                break;
-
-                            // convert to queen
-                            default:
-                                piece = new Queen(iW, end);
-                                break;
-                        }
-
-                        if (p.isWhite)
-                            board.whitePieces.add(piece);
-                        else
-                            board.blackPieces.add(piece);
-
-                    }
-
-                }
-
-                if (capturedPiece != null) {
-                    if (capturedPiece.isWhite) {
-                        board.whitePieces.remove(capturedPiece);
-                    } else {
-                        board.blackPieces.remove(capturedPiece);
-                    }
-                }
-
-                start.piece = null;
-                end.piece = piece;
-                piece.square = end;
+                // add move to stack
+                performMove(move);
+                moveStack.add(move);
                 System.out.println();
                 board.printBoard();
             } else {
@@ -182,13 +122,214 @@ public class Chess {
                 break;
             }
 
-            // add move to stack
-            moveStack.add(new Move(start, end, isWhiteTurn));
-
             isWhiteTurn = !isWhiteTurn;
         }
 
         scanner.close();
+    }
+
+    // does not check for valid move
+    public void performMove(Move move) {
+        Square start = move.start;
+        Square end = move.end;
+        Piece piece = start.piece;
+        Piece capturedPiece = end.piece;
+        System.out.println("captured piece: " + capturedPiece);
+
+        // for en passant
+        if (piece instanceof Pawn) {
+            if (Math.abs(end.rowpos - start.rowpos) == 1 && Math.abs(end.colpos -
+                    start.colpos) == 1
+                    && end.piece == null) {
+                if (piece.isWhite) {
+                    capturedPiece = board.board[end.rowpos + 1][end.colpos].piece;
+                    board.board[end.rowpos + 1][end.colpos].piece = null;
+                } else {
+                    capturedPiece = board.board[end.rowpos - 1][end.colpos].piece;
+                    board.board[end.rowpos - 1][end.colpos].piece = null;
+                }
+                // board.printBoard();
+
+            }
+        }
+
+        // pawn promotion
+        if (piece instanceof Pawn) {
+            Pawn p = (Pawn) piece;
+            if (end.rowpos == 7 || end.rowpos == 0) { // pawn reached end
+                move.isPromotion = true;
+                int convertPiece = move.promotion;
+
+                boolean iW = piece.isWhite;
+
+                if (p.isWhite)
+                    board.whitePieces.remove(piece);
+                else
+                    board.blackPieces.remove(piece);
+
+                switch (convertPiece) {
+                    // convert to knight
+                    case 78:
+                        piece = new Knight(iW, end);
+                        break;
+
+                    // convert to rook
+                    case 82:
+                        piece = new Rook(iW, end);
+                        break;
+
+                    // convert to bishop
+                    case 66:
+                        piece = new Bishop(iW, end);
+                        break;
+
+                    // convert to queen
+                    default:
+                        piece = new Queen(iW, end);
+                        break;
+                }
+
+                if (p.isWhite)
+                    board.whitePieces.add(piece);
+                else
+                    board.blackPieces.add(piece);
+
+                move.promotedPiece = piece;
+                move.isPromotion = true;
+            }
+
+        }
+
+        // for castling
+        if (piece instanceof King && Math.abs(start.colpos - end.colpos) == 2) {
+            if (piece.isWhite) {
+                // castling king side (right)
+                if ((start.colpos - end.colpos) == -2) {
+                    ((Rook) board.board[7][7].piece).moved = true;
+                    board.board[7][5].piece = board.board[7][7].piece;
+                    board.board[7][7].piece = null;
+                    board.board[7][5].piece.square = board.board[7][5];
+                }
+
+                // castling queen side (left)
+                if ((start.colpos - end.colpos) == 2) {
+                    ((Rook) board.board[7][0].piece).moved = true;
+                    board.board[7][3].piece = board.board[7][0].piece;
+                    board.board[7][0].piece = null;
+                    board.board[7][3].piece.square = board.board[7][3];
+                }
+            }
+
+            // black castling
+            else {
+                // castling king side (right)
+                if ((start.colpos - end.colpos) == -2) {
+                    ((Rook) board.board[0][7].piece).moved = true;
+                    board.board[0][5].piece = board.board[0][7].piece;
+                    board.board[0][7].piece = null;
+                    board.board[0][5].piece.square = board.board[0][5];
+                }
+
+                // castling queen side (left)
+                if ((start.colpos - end.colpos) == 2) {
+                    ((Rook) board.board[0][0].piece).moved = true;
+                    board.board[0][3].piece = board.board[0][0].piece;
+                    board.board[0][0].piece = null;
+                    board.board[0][3].piece.square = board.board[0][3];
+
+                }
+            }
+        }
+
+        // remove capturedPiece
+        if (capturedPiece != null) {
+            move.capturedPiece = capturedPiece;
+            System.out.println("captured " + move.capturedPiece);
+            if (capturedPiece.isWhite) {
+                board.whitePieces.remove(capturedPiece);
+            } else {
+                board.blackPieces.remove(capturedPiece);
+            }
+        }
+
+        piece.moved = true;
+        start.piece = null;
+        end.piece = piece;
+        piece.square = end;
+    }
+
+    public void revertMove(Move move) {
+        Square end = move.end;
+        Square start = move.start;
+        Piece movingPiece = move.movingPiece;
+        Piece capturedPiece = move.capturedPiece;
+
+        start.piece = movingPiece;
+        movingPiece.square = start;
+        movingPiece.moved = move.piecePreviouslyMoved;
+        end.piece = null;
+
+        if (capturedPiece != null) {
+            capturedPiece.square.piece = capturedPiece;
+            // capturedPiece.square = end;
+            capturedPiece.isTaken = false;
+            if (capturedPiece.isWhite) {
+                board.whitePieces.add(capturedPiece);
+            } else {
+                board.blackPieces.add(capturedPiece);
+            }
+        }
+
+        if (move.isPromotion) {
+            if (movingPiece.isWhite) {
+                board.whitePieces.add(movingPiece);
+                board.whitePieces.remove(move.promotedPiece);
+            } else {
+                board.blackPieces.add(movingPiece);
+                board.blackPieces.remove(move.promotedPiece);
+            }
+            return;
+        }
+
+        // check for castling and revert
+        if (movingPiece instanceof King && Math.abs(start.colpos - end.colpos) == 2) {
+            if (movingPiece.isWhite) {
+                // castling king side (right)
+                if ((start.colpos - end.colpos) == -2) {
+                    ((Rook) board.board[7][5].piece).moved = false;
+                    board.board[7][7].piece = board.board[7][5].piece;
+                    board.board[7][5].piece = null;
+                    board.board[7][7].piece.square = board.board[7][7];
+                }
+
+                // castling queen side (left)
+                if ((start.colpos - end.colpos) == 2) {
+                    ((Rook) board.board[7][3].piece).moved = false;
+                    board.board[7][0].piece = board.board[7][3].piece;
+                    board.board[7][3].piece = null;
+                    board.board[7][0].piece.square = board.board[7][0];
+                }
+            }
+
+            // black castling
+            else {
+                // castling king side (right)
+                if ((start.colpos - end.colpos) == -2) {
+                    ((Rook) board.board[0][5].piece).moved = false;
+                    board.board[0][7].piece = board.board[0][5].piece;
+                    board.board[0][5].piece = null;
+                    board.board[0][7].piece.square = board.board[0][7];
+                }
+
+                // castling queen side (left)
+                if ((start.colpos - end.colpos) == 2) {
+                    ((Rook) board.board[0][3].piece).moved = false;
+                    board.board[0][0].piece = board.board[0][3].piece;
+                    board.board[0][3].piece = null;
+                    board.board[0][0].piece.square = board.board[0][0];
+                }
+            }
+        }
     }
 
     /**

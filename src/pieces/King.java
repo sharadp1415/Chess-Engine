@@ -14,7 +14,6 @@ public class King extends Piece {
     /**
      * True if King has moved, false otherwise
      */
-    boolean isFirstMove;
 
     /**
      * 2-arg constructor for King class
@@ -24,7 +23,6 @@ public class King extends Piece {
      */
     public King(boolean isWhite, Square square) {
         super(isWhite, square);
-        isFirstMove = true;
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -37,7 +35,7 @@ public class King extends Piece {
         // castling attempt found
         if (Math.abs(start.colpos - end.colpos) == 2 && Math.abs(start.rowpos - end.rowpos) == 0) {
             // king has been moved before
-            if (!this.isFirstMove)
+            if (this.moved)
                 return false;
 
             // check if king is in check (can't castle then)
@@ -56,7 +54,7 @@ public class King extends Piece {
 
                     // rook being castled has moved before
                     Rook r = (Rook) p;
-                    if (!r.isFirstMove)
+                    if (r.moved)
                         return false;
 
                     // piece in between king and rook
@@ -64,12 +62,15 @@ public class King extends Piece {
                         if (b.board[7][i].piece != null)
                             return false;
 
-                    // moves rook to appropriate spot, king still moved in Chess class
-                    ((Rook) b.board[7][7].piece).isFirstMove = false;
-                    b.board[7][5].piece = b.board[7][7].piece;
-                    b.board[7][7].piece = null;
-                    this.isFirstMove = false;
-                    b.board[7][5].piece.square = b.board[7][5];
+                    // // moves rook to appropriate spot, king still moved in Chess class
+                    // /**
+                    // * Fixes this no state changes in is valid move
+                    // */
+                    // ((Rook) b.board[7][7].piece).isFirstMove = false;
+                    // b.board[7][5].piece = b.board[7][7].piece;
+                    // b.board[7][7].piece = null;
+                    // this.isFirstMove = false;
+                    // b.board[7][5].piece.square = b.board[7][5];
 
                     return true;
 
@@ -89,11 +90,11 @@ public class King extends Piece {
                         if (b.board[7][i].piece != null)
                             return false;
 
-                    ((Rook) b.board[7][0].piece).isFirstMove = false;
-                    b.board[7][3].piece = b.board[7][0].piece;
-                    b.board[7][0].piece = null;
-                    this.isFirstMove = false;
-                    b.board[7][3].piece.square = b.board[7][3];
+                    // ((Rook) b.board[7][0].piece).isFirstMove = false;
+                    // b.board[7][3].piece = b.board[7][0].piece;
+                    // b.board[7][0].piece = null;
+                    // this.isFirstMove = false;
+                    // b.board[7][3].piece.square = b.board[7][3];
 
                     return true;
 
@@ -116,11 +117,11 @@ public class King extends Piece {
                         if (b.board[0][i].piece != null)
                             return false;
 
-                    ((Rook) b.board[0][7].piece).isFirstMove = false;
-                    b.board[0][5].piece = b.board[0][7].piece;
-                    b.board[0][7].piece = null;
-                    this.isFirstMove = false;
-                    b.board[0][5].piece.square = b.board[0][5];
+                    // ((Rook) b.board[0][7].piece).isFirstMove = false;
+                    // b.board[0][5].piece = b.board[0][7].piece;
+                    // b.board[0][7].piece = null;
+                    // this.isFirstMove = false;
+                    // b.board[0][5].piece.square = b.board[0][5];
 
                     return true;
                 }
@@ -139,11 +140,11 @@ public class King extends Piece {
                         if (b.board[0][i].piece != null)
                             return false;
 
-                    ((Rook) b.board[0][0].piece).isFirstMove = false;
-                    b.board[0][3].piece = b.board[0][0].piece;
-                    b.board[0][0].piece = null;
-                    this.isFirstMove = false;
-                    b.board[0][3].piece.square = b.board[0][3];
+                    // ((Rook) b.board[0][0].piece).isFirstMove = false;
+                    // b.board[0][3].piece = b.board[0][0].piece;
+                    // b.board[0][0].piece = null;
+                    // this.isFirstMove = false;
+                    // b.board[0][3].piece.square = b.board[0][3];
 
                     return true;
 
@@ -183,7 +184,7 @@ public class King extends Piece {
             end.piece = temp;
         }
 
-        this.isFirstMove = false;
+        // this.isFirstMove = false;
         return true;
     }
 

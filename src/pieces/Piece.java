@@ -22,6 +22,7 @@ public abstract class Piece {
      */
     public boolean isWhite;
 
+    public boolean moved;
     /**
      * Square that piece resides on
      */
@@ -35,6 +36,7 @@ public abstract class Piece {
      */
     public Piece(boolean isWhite, Square square) {
         this.isTaken = false;
+        this.moved = false;
         this.square = square;
         this.isWhite = isWhite;
     }

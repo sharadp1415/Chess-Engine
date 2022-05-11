@@ -15,12 +15,6 @@ import chess.Square;
 public class Pawn extends Piece {
 
     /**
-     * False if Pawn has never moved, true otherwise, used to determine if Pawn is
-     * allowed to move twice on its first play
-     */
-    boolean moved = false;
-
-    /**
      * Determines if Pawn has just moved, used for en passant
      */
     public boolean justMoved = false;
@@ -73,8 +67,9 @@ public class Pawn extends Piece {
 
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || moveStack.isEmpty()
-                            || moveStack.peek().movingPiece == potentialPiece
+                            || moveStack.peek().movingPiece != potentialPiece
                             || ((Pawn) potentialPiece).isWhite) {
+                        System.out.println("returning false " + (moveStack.peek().movingPiece == potentialPiece));
                         return false;
                     }
                 }
@@ -119,7 +114,7 @@ public class Pawn extends Piece {
                     Piece potentialPiece = b.board[start.rowpos][end.colpos].piece;
                     if (potentialPiece == null || !(potentialPiece instanceof Pawn)
                             || moveStack.isEmpty()
-                            || moveStack.peek().movingPiece == potentialPiece
+                            || moveStack.peek().movingPiece != potentialPiece
                             || !((Pawn) potentialPiece).isWhite) {
                         return false;
                     }
@@ -176,9 +171,9 @@ public class Pawn extends Piece {
             }
         }
 
-        if (output == true) {
-            moved = true;
-        }
+        // if (output == true) {
+        // moved = true;
+        // }
 
         return output;
     }
