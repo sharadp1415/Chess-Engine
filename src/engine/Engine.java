@@ -8,15 +8,20 @@ import pieces.Piece;
 public class Engine {
 
     public static int evaluatePosition(Chess game) {
+        int result = 0;
 
         HashSet<Piece> whitePieces = game.board.whitePieces;
         HashSet<Piece> blackPieces = game.board.blackPieces;
 
         for (Piece whitePiece : whitePieces) {
-
+            result += whitePiece.pieceValue(game);
         }
 
-        return 0;
+        for (Piece blackPiece : blackPieces) {
+            result -= blackPiece.pieceValue(game);
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
