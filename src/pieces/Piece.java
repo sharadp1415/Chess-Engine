@@ -68,6 +68,8 @@ public abstract class Piece {
      */
     public abstract HashSet<Square> squaresBetween(Square start, Square end, Board b);
 
+    public abstract int pieceValue(Chess game);
+
     /**
      * Returns piece in String format
      * 

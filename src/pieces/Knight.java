@@ -74,6 +74,11 @@ public class Knight extends Piece {
         return new HashSet<>();
     }
 
+    public int pieceValue(Chess game) {
+
+        return 0;
+    }
+
     public String toString() {
         return isWhite ? "wN " : "bN ";
     }

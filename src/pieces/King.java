@@ -188,6 +188,11 @@ public class King extends Piece {
         return true;
     }
 
+    public int pieceValue(Chess game) {
+
+        return 0;
+    }
+
     public HashSet<Square> squaresBetween(Square start, Square end, Board b) {
         return new HashSet<>();
     }

@@ -139,6 +139,11 @@ public class Bishop extends Piece {
         return squares;
     }
 
+    public int pieceValue(Chess game) {
+
+        return 0;
+    }
+
     public String toString() {
         return isWhite ? "wB " : "bB ";
     }
