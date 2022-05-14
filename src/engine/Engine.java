@@ -24,6 +24,36 @@ public class Engine {
         return result;
     }
 
+    public static int minimax(Chess game, int depth, int alpha, int beta, boolean isWhite) {
+        if (depth == 0 || game.board.inCheckmate(isWhite)) {
+            return evaluatePosition(game);
+        }
+
+        if (isWhite) {
+            int maxEval = Integer.MIN_VALUE;
+            //for each position possible by applying every move {
+                int eval = minimax(game, depth - 1, alpha, beta, false);
+                maxEval = Math.max(maxEval, eval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha) {
+                    // break; (for loop)
+                // }
+                }
+            return maxEval;
+        } else {
+            int minEval = Integer.MAX_VALUE;
+            //for each position possible by applying every move {
+                int eval = minimax(game, depth - 1, alpha, beta, true);
+                minEval = Math.min(minEval, eval);
+                alpha = Math.min(beta, eval);
+                if (beta <= alpha) {
+                    // break; (for loop)
+                // }
+                }
+            return minEval;
+        }
+    }
+
     public static void main(String[] args) {
 
     }
