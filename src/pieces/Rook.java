@@ -20,6 +20,27 @@ public class Rook extends Piece {
      */
     public Rook(boolean isWhite, Square square) {
         super(isWhite, square);
+        if (isWhite) {
+            valueTable = new int[][] {
+                    { 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 5, 10, 10, 10, 10, 10, 10, 5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { 0, 0, 0, 5, 5, 0, 0, 0 } };
+        } else {
+            valueTable = new int[][] {
+                    { 0, 0, 0, 5, 5, 0, 0, 0 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { -5, 0, 0, 0, 0, 0, 0, -5 },
+                    { 5, 10, 10, 10, 10, 10, 10, 5 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0 } };
+        }
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -125,7 +146,7 @@ public class Rook extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 5;
+        return 500 + valueTable[square.rowpos][square.colpos];
     }
 
     public String toString() {

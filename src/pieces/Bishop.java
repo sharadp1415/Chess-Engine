@@ -20,6 +20,27 @@ public class Bishop extends Piece {
      */
     public Bishop(boolean isWhite, Square square) {
         super(isWhite, square);
+        if (isWhite) {
+            valueTable = new int[][] {
+                    { -20, -10, -10, -10, -10, -10, -10, -20 },
+                    { -10, 0, 0, 0, 0, 0, 0, -10 },
+                    { -10, 0, 5, 10, 10, 5, 0, -10 },
+                    { -10, 5, 5, 10, 10, 5, 5, -10 },
+                    { -10, 0, 10, 10, 10, 10, 0, -10 },
+                    { -10, 10, 10, 10, 10, 10, 10, -10 },
+                    { -10, 15, 0, 0, 0, 0, 15, -10 },
+                    { -20, -10, -10, -10, -10, -10, -10, -20 } };
+        } else {
+            valueTable = new int[][] {
+                    { -20, -10, -10, -10, -10, -10, -10, -20 },
+                    { -10, 15, 0, 0, 0, 0, 15, -10 },
+                    { -10, 10, 10, 10, 10, 10, 10, -10 },
+                    { -10, 0, 10, 10, 10, 10, 0, -10 },
+                    { -10, 5, 5, 10, 10, 5, 5, -10 },
+                    { -10, 0, 5, 10, 10, 5, 0, -10 },
+                    { -10, 0, 0, 0, 0, 0, 0, -10 },
+                    { -20, -10, -10, -10, -10, -10, -10, -20 } };
+        }
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -141,7 +162,7 @@ public class Bishop extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 3;
+        return 330 + valueTable[square.rowpos][square.colpos];
     }
 
     public String toString() {

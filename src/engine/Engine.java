@@ -38,13 +38,14 @@ public class Engine {
 
     public static int minimax(Chess game, int depth, int alpha, int beta, boolean isWhite) {
         if (depth == 0 || game.board.inCheckmate(isWhite)) {
-            int test = evaluatePosition(game);
-            // System.out.println(test);
-            if (test == Integer.MIN_VALUE) {
-                System.out.println("\nTHIS IS THE IDEAL BOARD");
-                game.board.printBoard();
-            }
-            return test;
+            // int test = evaluatePosition(game);
+            // // System.out.println(test);
+            // if (test == Integer.MIN_VALUE) {
+            // System.out.println("\nTHIS IS THE IDEAL BOARD");
+            // game.board.printBoard();
+            // }
+            // return test;
+            return evaluatePosition(game);
         }
 
         if (isWhite) {
@@ -84,6 +85,7 @@ public class Engine {
 
     public static Move bestMove(Chess game, boolean isWhiteTurn) {
         Move bestMove = null;
+        int depth = 3;
 
         int minmax = 0;
 
@@ -96,7 +98,7 @@ public class Engine {
         for (Move potentialMove : game.generateAllLegalMoves(isWhiteTurn)) {
             game.performMove(potentialMove);
             // test with iswhiteturn and !iswhiteturn (DONE)
-            int eval = minimax(game, 2, Integer.MIN_VALUE, Integer.MAX_VALUE, !isWhiteTurn);
+            int eval = minimax(game, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, !isWhiteTurn);
             if (!isWhiteTurn && eval < minmax) {
                 minmax = eval;
                 bestMove = potentialMove;

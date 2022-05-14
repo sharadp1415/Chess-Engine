@@ -28,6 +28,8 @@ public abstract class Piece {
      */
     public Square square;
 
+    public int[][] valueTable;
+
     /**
      * 2-arg constructor for Piece
      * 
@@ -39,6 +41,7 @@ public abstract class Piece {
         this.moved = false;
         this.square = square;
         this.isWhite = isWhite;
+        this.valueTable = new int[8][8];
     }
 
     /**

@@ -11,9 +11,6 @@ import chess.Square;
  */
 
 public class King extends Piece {
-    /**
-     * True if King has moved, false otherwise
-     */
 
     /**
      * 2-arg constructor for King class
@@ -21,8 +18,51 @@ public class King extends Piece {
      * @param isWhite If piece is white or black
      * @param square  Square piece resides on
      */
+
+    int[][] valueTableEndGame;
+
     public King(boolean isWhite, Square square) {
         super(isWhite, square);
+        if (isWhite) {
+            valueTable = new int[][] {
+                    { -30, -40, -30, -50, -50, -40, -40, -30 },
+                    { -30, -40, -40, -50, -50, -40, -40, -30 },
+                    { -30, -40, -40, -50, -50, -40, -40, -30 },
+                    { -30, -40, -40, -50, -50, -40, -40, -30 },
+                    { -20, -30, -30, -40, -40, -30, -30, -20 },
+                    { -10, -20, -20, -20, -20, -20, -20, -10 },
+                    { 20, 20, 0, 5, 5, 0, 20, 20 },
+                    { 20, 30, 10, 0, 0, 10, 30, 20 } };
+
+            valueTableEndGame = new int[][] {
+                    { -50, -40, -30, -20, -20, -30, -40, -50 },
+                    { -30, -20, -10, 0, 0, -10, -20, -30 },
+                    { -30, -10, 20, 30, 30, 20, -10, -30 },
+                    { -30, -10, 30, 40, 40, 30, -10, -30 },
+                    { -30, -10, 30, 40, 40, 30, -10, -30 },
+                    { -30, -10, 20, 30, 30, 20, -10, -30 },
+                    { -30, -30, 0, 0, 0, 0, -30, -30 },
+                    { -50, -30, -30, -30, -30, -30, -30, -50 } };
+        } else {
+            valueTable = new int[][] {
+                    { 20, 30, 10, 0, 0, 10, 30, 20 },
+                    { 20, 20, 0, 5, 5, 0, 20, 20 },
+                    { -10, -20, -20, -20, -20, -20, -20, -10 },
+                    { -20, -30, -30, -40, -40, -30, -30, -20 },
+                    { -30, -40, -30, -50, -50, -40, -40, -30 },
+                    { -30, -40, -30, -50, -50, -40, -40, -30 },
+                    { -30, -40, -30, -50, -50, -40, -40, -30 },
+                    { -30, -40, -30, -50, -50, -40, -40, -30 } };
+            valueTableEndGame = new int[][] {
+                    { -50, -30, -30, -30, -30, -30, -30, -50 },
+                    { -30, -30, 0, 0, 0, 0, -30, -30 },
+                    { -30, -10, 20, 30, 30, 20, -10, -30 },
+                    { -30, -10, 30, 40, 40, 30, -10, -30 },
+                    { -30, -10, 30, 40, 40, 30, -10, -30 },
+                    { -30, -10, 20, 30, 30, 20, -10, -30 },
+                    { -30, -20, -10, 0, 0, -10, -20, -30 },
+                    { -50, -40, -30, -20, -20, -30, -40, -50 } };
+        }
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -190,7 +230,7 @@ public class King extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 200;
+        return 20000 + valueTable[square.rowpos][square.colpos];
     }
 
     public HashSet<Square> squaresBetween(Square start, Square end, Board b) {

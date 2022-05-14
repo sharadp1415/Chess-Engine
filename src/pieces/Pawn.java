@@ -27,6 +27,27 @@ public class Pawn extends Piece {
      */
     public Pawn(boolean isWhite, Square square) {
         super(isWhite, square);
+        if (isWhite) {
+            valueTable = new int[][] {
+                    { 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 50, 50, 50, 50, 50, 50, 50, 50 },
+                    { 10, 10, 20, 30, 30, 20, 10, 10 },
+                    { 5, 5, 10, 25, 25, 10, 5, 5 },
+                    { 0, 0, 0, 20, 20, 0, 0, 0 },
+                    { 5, -5, -10, 0, 0, -10, -5, 5 },
+                    { 5, 10, 10, -20, -20, 10, 10, 5 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0 } };
+        } else {
+            valueTable = new int[][] {
+                    { 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 5, 10, 10, -20, -20, 10, 10, 5 },
+                    { 5, -5, -10, 0, 0, -10, -5, 5 },
+                    { 0, 0, 0, 20, 20, 0, 0, 0 },
+                    { 5, 5, 10, 25, 25, 10, 5, 5 },
+                    { 10, 10, 20, 30, 30, 20, 10, 10 },
+                    { 50, 50, 50, 50, 50, 50, 50, 50 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0 } };
+        }
     }
 
     public boolean isValidMove(Square start, Square end, Chess game) {
@@ -192,8 +213,9 @@ public class Pawn extends Piece {
     }
 
     public int pieceValue(Chess game) {
+        int bonus = 0;
 
-        return 1;
+        return 100 + valueTable[square.rowpos][square.colpos];
     }
 
     public String toString() {
