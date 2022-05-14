@@ -3,9 +3,12 @@ package engine;
 import java.util.HashSet;
 
 import chess.Chess;
+import chess.Move;
 import pieces.Piece;
 
 public class Engine {
+
+    // private static Move bestMove = null;
 
     public static int evaluatePosition(Chess game) {
         int result = 0;
@@ -31,27 +34,54 @@ public class Engine {
 
         if (isWhite) {
             int maxEval = Integer.MIN_VALUE;
-            //for each position possible by applying every move {
+            // for each position possible by applying every move {
+            for (Move potentialMove : game.generateAllLegalMoves(isWhite)) {
+                game.performMove(potentialMove);
                 int eval = minimax(game, depth - 1, alpha, beta, false);
+                game.revertMove(potentialMove);
                 maxEval = Math.max(maxEval, eval);
+                // if (eval > maxEval) {
+                // maxEval = eval;
+                // bestMove = potentialMove;
+                // }
                 alpha = Math.max(alpha, eval);
                 if (beta <= alpha) {
-                    // break; (for loop)
-                // }
+                    break;
                 }
+            }
             return maxEval;
         } else {
             int minEval = Integer.MAX_VALUE;
-            //for each position possible by applying every move {
+            // for each position possible by applying every move {
+            for (Move potentialMove : game.generateAllLegalMoves(isWhite)) {
+                game.performMove(potentialMove);
                 int eval = minimax(game, depth - 1, alpha, beta, true);
+                game.revertMove(potentialMove);
                 minEval = Math.min(minEval, eval);
                 alpha = Math.min(beta, eval);
                 if (beta <= alpha) {
-                    // break; (for loop)
-                // }
+                    break;
                 }
+            }
             return minEval;
         }
+    }
+
+    public Move bestMove(Chess game, boolean isWhiteTurn) {
+        Move bestMove = null;
+        int max = Integer.MIN_VALUE;
+
+        for (Move potentialMove : game.generateAllLegalMoves(isWhiteTurn)) {
+            game.performMove(potentialMove);
+            // test with iswhiteturn and !iswhiteturn
+            int eval = minimax(game, 2, Integer.MIN_VALUE, Integer.MAX_VALUE, !isWhiteTurn);
+            if (eval > max) {
+                bestMove = potentialMove;
+            }
+            game.revertMove(potentialMove);
+        }
+
+        return bestMove;
     }
 
     public static void main(String[] args) {

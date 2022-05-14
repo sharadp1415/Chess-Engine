@@ -1,6 +1,9 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 
 import pieces.Bishop;
@@ -134,7 +137,7 @@ public class Chess {
         Square end = move.end;
         Piece piece = start.piece;
         Piece capturedPiece = end.piece;
-        System.out.println("captured piece: " + capturedPiece);
+        // System.out.println("captured piece: " + capturedPiece);
 
         // for en passant
         if (piece instanceof Pawn) {
@@ -330,6 +333,31 @@ public class Chess {
                 }
             }
         }
+    }
+
+    public List<Move> generateAllLegalMoves(boolean isWhiteTurn) {
+        List<Move> outputList = new ArrayList<>();
+
+        Set<Piece> pieces;
+        if (isWhiteTurn) {
+            pieces = board.whitePieces;
+        } else {
+            pieces = board.blackPieces;
+        }
+
+        for (Piece piece : pieces) {
+            Square start = piece.square;
+            for (Square[] array : board.board) {
+                for (Square square : array) {
+                    if (piece.isValidMove(start, square, this)) {
+                        Move potentialMove = new Move(start, square, isWhiteTurn);
+                        outputList.add(potentialMove);
+                    }
+                }
+            }
+        }
+
+        return outputList;
     }
 
     /**
