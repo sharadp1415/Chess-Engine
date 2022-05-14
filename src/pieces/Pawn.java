@@ -69,7 +69,8 @@ public class Pawn extends Piece {
                             || moveStack.isEmpty()
                             || moveStack.peek().movingPiece != potentialPiece
                             || ((Pawn) potentialPiece).isWhite) {
-                        System.out.println("returning false " + (moveStack.peek().movingPiece == potentialPiece));
+                        // System.out.println("returning false " + (moveStack.peek().movingPiece ==
+                        // potentialPiece));
                         return false;
                     }
                 }
@@ -192,7 +193,7 @@ public class Pawn extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 0;
+        return 1;
     }
 
     public String toString() {

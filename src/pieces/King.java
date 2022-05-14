@@ -190,7 +190,7 @@ public class King extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 0;
+        return 200;
     }
 
     public HashSet<Square> squaresBetween(Square start, Square end, Board b) {

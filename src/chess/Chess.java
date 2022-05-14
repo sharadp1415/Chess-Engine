@@ -1,6 +1,8 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -256,7 +258,7 @@ public class Chess {
         // remove capturedPiece
         if (capturedPiece != null) {
             move.capturedPiece = capturedPiece;
-            System.out.println("captured " + move.capturedPiece);
+            // System.out.println("captured " + move.capturedPiece);
             if (capturedPiece.isWhite) {
                 board.whitePieces.remove(capturedPiece);
             } else {
@@ -349,9 +351,9 @@ public class Chess {
 
         Set<Piece> pieces;
         if (isWhiteTurn) {
-            pieces = board.whitePieces;
+            pieces = new HashSet<>(board.whitePieces);
         } else {
-            pieces = board.blackPieces;
+            pieces = new HashSet<>(board.blackPieces);
         }
 
         for (Piece piece : pieces) {
@@ -365,6 +367,20 @@ public class Chess {
                 }
             }
         }
+
+        // pieces.stream().forEach(piece -> {
+        // Square start = piece.square;
+        // Arrays.stream(board.board)
+        // .forEach(array -> {
+        // Arrays.stream(array)
+        // .forEach(square -> {
+        // if (piece.isValidMove(start, square, this)) {
+        // Move potentialMove = new Move(start, square, isWhiteTurn);
+        // outputList.add(potentialMove);
+        // }
+        // });
+        // });
+        // });
 
         return outputList;
     }

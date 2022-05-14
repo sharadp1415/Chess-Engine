@@ -76,7 +76,7 @@ public class Knight extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 0;
+        return 3;
     }
 
     public String toString() {

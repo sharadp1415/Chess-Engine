@@ -11,6 +11,15 @@ public class Engine {
     // private static Move bestMove = null;
 
     public static int evaluatePosition(Chess game) {
+        if (game.board.inCheckmate(true)) {
+            System.out.println("Line Found with White King in Checkmate");
+            return Integer.MIN_VALUE;
+        }
+
+        if (game.board.inCheckmate(false)) {
+            return Integer.MAX_VALUE;
+        }
+
         int result = 0;
 
         HashSet<Piece> whitePieces = game.board.whitePieces;
@@ -29,7 +38,13 @@ public class Engine {
 
     public static int minimax(Chess game, int depth, int alpha, int beta, boolean isWhite) {
         if (depth == 0 || game.board.inCheckmate(isWhite)) {
-            return evaluatePosition(game);
+            int test = evaluatePosition(game);
+            // System.out.println(test);
+            if (test == Integer.MIN_VALUE) {
+                System.out.println("\nTHIS IS THE IDEAL BOARD");
+                game.board.printBoard();
+            }
+            return test;
         }
 
         if (isWhite) {
@@ -69,18 +84,34 @@ public class Engine {
 
     public static Move bestMove(Chess game, boolean isWhiteTurn) {
         Move bestMove = null;
-        int max = Integer.MIN_VALUE;
+
+        int minmax = 0;
+
+        if (isWhiteTurn) {
+            minmax = Integer.MIN_VALUE;
+        } else {
+            minmax = Integer.MAX_VALUE;
+        }
 
         for (Move potentialMove : game.generateAllLegalMoves(isWhiteTurn)) {
             game.performMove(potentialMove);
-            // test with iswhiteturn and !iswhiteturn
+            // test with iswhiteturn and !iswhiteturn (DONE)
             int eval = minimax(game, 2, Integer.MIN_VALUE, Integer.MAX_VALUE, !isWhiteTurn);
-            if (eval > max) {
+            if (!isWhiteTurn && eval < minmax) {
+                minmax = eval;
                 bestMove = potentialMove;
             }
+
+            if (isWhiteTurn && eval > minmax) {
+                minmax = eval;
+                bestMove = potentialMove;
+            }
+
             game.revertMove(potentialMove);
         }
 
+        System.out.println("Best Eval: " + minmax);
+        System.out.println("Best Move: " + bestMove);
         return bestMove;
     }
 

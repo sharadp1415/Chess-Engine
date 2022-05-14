@@ -24,4 +24,12 @@ public class Move {
         promotedPiece = null;
         piecePreviouslyMoved = movingPiece.moved;
     }
+
+    public String toString() {
+        if (capturedPiece != null) {
+            return movingPiece + "x" + end;
+        } else {
+            return movingPiece + " " + end;
+        }
+    }
 }

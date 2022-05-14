@@ -125,7 +125,7 @@ public class Rook extends Piece {
 
     public int pieceValue(Chess game) {
 
-        return 0;
+        return 5;
     }
 
     public String toString() {
