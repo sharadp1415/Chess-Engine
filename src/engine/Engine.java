@@ -67,7 +67,7 @@ public class Engine {
         }
     }
 
-    public Move bestMove(Chess game, boolean isWhiteTurn) {
+    public static Move bestMove(Chess game, boolean isWhiteTurn) {
         Move bestMove = null;
         int max = Integer.MIN_VALUE;
 

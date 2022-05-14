@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
+import engine.Engine;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
@@ -75,29 +76,37 @@ public class Chess {
                 drawOffered = true;
             }
 
-            Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
-            Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
-            Piece piece = start.piece;
-            Move move = new Move(start, end, isWhiteTurn);
-            if (array.length > 2) {
-                int convertPiece = array[2].charAt(0);
-                move.promotion = convertPiece;
-            }
-
-            if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
-                System.out.print("Illegal move, try again");
-                continue;
-            }
-
-            if (piece.isValidMove(start, end, this)) {
-                // add move to stack
-                performMove(move);
-                moveStack.add(move);
+            if (input.equals("best move")) {
+                Move bestMove = Engine.bestMove(this, isWhiteTurn);
+                performMove(bestMove);
+                moveStack.add(bestMove);
                 System.out.println();
                 board.printBoard();
             } else {
-                System.out.println("Illegal move, try again");
-                continue;
+                Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
+                Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
+                Piece piece = start.piece;
+                Move move = new Move(start, end, isWhiteTurn);
+                if (array.length > 2) {
+                    int convertPiece = array[2].charAt(0);
+                    move.promotion = convertPiece;
+                }
+
+                if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
+                    System.out.print("Illegal move, try again");
+                    continue;
+                }
+
+                if (piece.isValidMove(start, end, this)) {
+                    // add move to stack
+                    performMove(move);
+                    moveStack.add(move);
+                    System.out.println();
+                    board.printBoard();
+                } else {
+                    System.out.println("Illegal move, try again");
+                    continue;
+                }
             }
 
             if (board.inCheckmate(!isWhiteTurn)) {
