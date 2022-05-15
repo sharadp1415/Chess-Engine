@@ -12,7 +12,7 @@ public class Engine {
 
     public static int evaluatePosition(Chess game) {
         if (game.board.inCheckmate(true)) {
-            System.out.println("Line Found with White King in Checkmate");
+            // System.out.println("Line Found with White King in Checkmate");
             return Integer.MIN_VALUE;
         }
 
@@ -85,6 +85,7 @@ public class Engine {
 
     public static Move bestMove(Chess game, boolean isWhiteTurn) {
         Move bestMove = null;
+        // depth 4 takes a long time
         int depth = 3;
 
         int minmax = 0;

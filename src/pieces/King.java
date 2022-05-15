@@ -203,12 +203,14 @@ public class King extends Piece {
         HashSet<Piece> oppPieces;
 
         if (start.piece.isWhite) {
-            oppPieces = b.blackPieces;
+            oppPieces = new HashSet<>(b.blackPieces);
         } else {
-            oppPieces = b.whitePieces;
+            oppPieces = new HashSet<>(b.whitePieces);
         }
 
         for (Piece piece : oppPieces) {
+            if (piece.isTaken)
+                continue;
             Piece temp = end.piece;
             end.piece = this;
             this.square = end;

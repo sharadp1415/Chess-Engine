@@ -138,7 +138,7 @@ public class Board {
         Square kingPosition = null;
 
         if (isWhite) {
-            oppPieces = blackPieces;
+            oppPieces = new HashSet<>(blackPieces);
             // for (Piece piece : whitePieces) {
             // if (piece instanceof King) {
             // kingPosition = piece.square;
@@ -146,7 +146,8 @@ public class Board {
             // }
             kingPosition = whiteKingPosition;
         } else {
-            oppPieces = whitePieces;
+            oppPieces = new HashSet<>(whitePieces);
+            // oppPieces = whitePieces;
             // for (Piece piece : blackPieces) {
             // if (piece instanceof King) {
             // kingPosition = piece.square;
@@ -156,6 +157,8 @@ public class Board {
         }
 
         for (Piece piece : oppPieces) {
+            if (piece.isTaken)
+                continue;
             if (piece.isValidMove(piece.square, kingPosition, game)) {
                 return true;
             }
@@ -190,8 +193,8 @@ public class Board {
                 }
             }
         } else {
-            oppPieces = whitePieces;
-            ownPieces = blackPieces;
+            oppPieces = new HashSet<>(whitePieces);
+            ownPieces = new HashSet<>(blackPieces);
             for (Piece piece : blackPieces) {
                 if (piece instanceof King) {
                     kingPosition = piece.square;
@@ -215,6 +218,8 @@ public class Board {
         HashSet<Piece> attackPieces = new HashSet<>();
 
         for (Piece piece : oppPieces) {
+            if (piece.isTaken)
+                continue;
             if (piece.isValidMove(piece.square, kingPosition, game)) {
                 attackPieces.add(piece);
             }
@@ -230,6 +235,8 @@ public class Board {
             HashSet<Square> squaresBetween = attackPiece.squaresBetween(attackPiece.square, kingPosition, this);
             for (Square square : squaresBetween) {
                 for (Piece ownPiece : ownPieces) {
+                    if (ownPiece.isTaken)
+                        continue;
                     if (!(ownPiece instanceof King) && ownPiece.isValidMove(ownPiece.square, square, game)) {
                         return false;
                     }
@@ -240,7 +247,7 @@ public class Board {
         // check if capture attacking piece
         for (Piece attackPiece : attackPieces) {
             for (Piece ownPiece : ownPieces) {
-                if (ownPiece instanceof King) {
+                if (ownPiece instanceof King || ownPiece.isTaken) {
                     continue;
                 }
                 if (ownPiece.isValidMove(ownPiece.square, attackPiece.square, game)) {

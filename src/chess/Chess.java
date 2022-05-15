@@ -87,15 +87,16 @@ public class Chess {
                 Square start = board.board[8 - Integer.parseInt(array[0].substring(1))][(array[0].charAt(0) - 97)];
                 Square end = board.board[8 - Integer.parseInt(array[1].substring(1))][(array[1].charAt(0) - 97)];
                 Piece piece = start.piece;
-                Move move = new Move(start, end, isWhiteTurn);
-                if (array.length > 2) {
-                    int convertPiece = array[2].charAt(0);
-                    move.promotion = convertPiece;
-                }
 
                 if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
                     System.out.print("Illegal move, try again");
                     continue;
+                }
+
+                Move move = new Move(start, end, isWhiteTurn);
+                if (array.length > 2) {
+                    int convertPiece = array[2].charAt(0);
+                    move.promotion = convertPiece;
                 }
 
                 if (piece.isValidMove(start, end, this)) {
@@ -257,6 +258,7 @@ public class Chess {
         // remove capturedPiece
         if (capturedPiece != null) {
             move.capturedPiece = capturedPiece;
+            capturedPiece.isTaken = true;
             // System.out.println("captured " + move.capturedPiece);
             if (capturedPiece.isWhite) {
                 board.whitePieces.remove(capturedPiece);
@@ -374,6 +376,8 @@ public class Chess {
         }
 
         for (Piece piece : pieces) {
+            if (piece.isTaken)
+                continue;
             Square start = piece.square;
             for (Square[] array : board.board) {
                 for (Square square : array) {
