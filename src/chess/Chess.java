@@ -265,6 +265,15 @@ public class Chess {
             }
         }
 
+        // update kingposition
+        if (piece instanceof King) {
+            if (piece.isWhite) {
+                board.whiteKingPosition = end;
+            } else {
+                board.blackKingPosition = end;
+            }
+        }
+
         piece.moved = true;
         start.piece = null;
         end.piece = piece;
@@ -341,6 +350,15 @@ public class Chess {
                     board.board[0][3].piece = null;
                     board.board[0][0].piece.square = board.board[0][0];
                 }
+            }
+        }
+
+        // update kingPosition
+        if (movingPiece instanceof King) {
+            if (movingPiece.isWhite) {
+                board.whiteKingPosition = start;
+            } else {
+                board.blackKingPosition = start;
             }
         }
     }

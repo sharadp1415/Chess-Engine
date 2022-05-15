@@ -38,6 +38,9 @@ public class Board {
 
     public Chess game;
 
+    public Square whiteKingPosition;
+    public Square blackKingPosition;
+
     /**
      * Default board constructor
      */
@@ -79,6 +82,7 @@ public class Board {
         board[0][5].piece = new Bishop(false, board[0][5]);
         board[0][3].piece = new Queen(false, board[0][3]);
         board[0][4].piece = new King(false, board[0][4]);
+        blackKingPosition = board[0][4];
 
         board[7][0].piece = new Rook(true, board[7][0]);
         board[7][7].piece = new Rook(true, board[7][7]);
@@ -88,6 +92,7 @@ public class Board {
         board[7][5].piece = new Bishop(true, board[7][5]);
         board[7][3].piece = new Queen(true, board[7][3]);
         board[7][4].piece = new King(true, board[7][4]);
+        whiteKingPosition = board[7][4];
 
         for (int i = 0; i < 8; i++) {
             blackPieces.add(board[0][i].piece);
@@ -134,18 +139,20 @@ public class Board {
 
         if (isWhite) {
             oppPieces = blackPieces;
-            for (Piece piece : whitePieces) {
-                if (piece instanceof King) {
-                    kingPosition = piece.square;
-                }
-            }
+            // for (Piece piece : whitePieces) {
+            // if (piece instanceof King) {
+            // kingPosition = piece.square;
+            // }
+            // }
+            kingPosition = whiteKingPosition;
         } else {
             oppPieces = whitePieces;
-            for (Piece piece : blackPieces) {
-                if (piece instanceof King) {
-                    kingPosition = piece.square;
-                }
-            }
+            // for (Piece piece : blackPieces) {
+            // if (piece instanceof King) {
+            // kingPosition = piece.square;
+            // }
+            // }
+            kingPosition = blackKingPosition;
         }
 
         for (Piece piece : oppPieces) {
