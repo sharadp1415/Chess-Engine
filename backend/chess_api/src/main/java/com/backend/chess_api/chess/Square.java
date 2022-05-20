@@ -1,6 +1,6 @@
-package chess;
+package com.backend.chess_api.chess;
 
-import chess.pieces.Piece;
+import com.backend.chess_api.chess.pieces.Piece;
 
 /**
  * @author Naman Bajaj, Sharad Prasad

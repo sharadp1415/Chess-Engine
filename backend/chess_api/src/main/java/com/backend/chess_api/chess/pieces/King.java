@@ -1,10 +1,10 @@
-package chess.pieces;
+package com.backend.chess_api.chess.pieces;
 
 import java.util.HashSet;
 
-import chess.Board;
-import chess.Chess;
-import chess.Square;
+import com.backend.chess_api.chess.Board;
+import com.backend.chess_api.chess.Chess;
+import com.backend.chess_api.chess.Square;
 
 /**
  * @author Naman Bajaj, Sharad Prasad

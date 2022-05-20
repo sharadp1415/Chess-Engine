@@ -1,10 +1,10 @@
-package engine;
+package com.backend.chess_api.engine;
 
 import java.util.HashSet;
 
-import chess.Chess;
-import chess.Move;
-import chess.pieces.Piece;
+import com.backend.chess_api.chess.Chess;
+import com.backend.chess_api.chess.Move;
+import com.backend.chess_api.chess.pieces.Piece;
 
 public class Engine {
 

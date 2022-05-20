@@ -1,4 +1,4 @@
-package chess;
+package com.backend.chess_api.chess;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,14 +7,15 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
-import engine.Engine;
+import com.backend.chess_api.chess.pieces.Bishop;
+import com.backend.chess_api.chess.pieces.King;
+import com.backend.chess_api.chess.pieces.Knight;
+import com.backend.chess_api.chess.pieces.Pawn;
+import com.backend.chess_api.chess.pieces.Piece;
+import com.backend.chess_api.chess.pieces.Queen;
+import com.backend.chess_api.chess.pieces.Rook;
+
+import com.backend.chess_api.engine.Engine;
 
 /**
  * @author Naman Bajaj, Sharad Prasad
