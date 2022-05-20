@@ -213,7 +213,6 @@ public class Pawn extends Piece {
     }
 
     public int pieceValue(Chess game) {
-        int bonus = 0;
 
         return 100 + valueTable[square.rowpos][square.colpos];
     }
