@@ -1,0 +1,24 @@
+.chessboard {
+    width: 720px;
+    height: 720px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    /* display: grid;
+    grid-template-rows: 8;
+    grid-template-columns: 8; */
+    /* background-color: black; */
+}
+
+.chessboard .tile {
+    width: 90px;
+    height: 90px;
+}
+
+.colored {
+    background-color: rgb(181,136,99);
+}
+
+.notcolored {
+    background-color: rgb(240,217,181);
+}

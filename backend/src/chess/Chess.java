@@ -7,14 +7,14 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
+import chess.pieces.Bishop;
+import chess.pieces.King;
+import chess.pieces.Knight;
+import chess.pieces.Pawn;
+import chess.pieces.Piece;
+import chess.pieces.Queen;
+import chess.pieces.Rook;
 import engine.Engine;
-import pieces.Bishop;
-import pieces.King;
-import pieces.Knight;
-import pieces.Pawn;
-import pieces.Piece;
-import pieces.Queen;
-import pieces.Rook;
 
 /**
  * @author Naman Bajaj, Sharad Prasad

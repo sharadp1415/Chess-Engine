@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 import chess.Chess;
 import chess.Move;
-import pieces.Piece;
+import chess.pieces.Piece;
 
 public class Engine {
 

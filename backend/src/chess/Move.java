@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Piece;
+import chess.pieces.Piece;
 
 public class Move {
     public Square start;

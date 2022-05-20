@@ -1,4 +1,4 @@
-package pieces;
+package chess.pieces;
 
 import java.util.HashSet;
 

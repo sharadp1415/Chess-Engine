@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Piece;
+import chess.pieces.Piece;
 
 /**
  * @author Naman Bajaj, Sharad Prasad
