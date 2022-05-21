@@ -7,6 +7,7 @@ const Tile = ({ setPickedSquare, location, colored }) => {
         <div
             className={colored ? "tile colored" : "tile notcolored"}
             onClick={() => {
+                // console.log(location);
                 setPickedSquare(location);
             }}
         >
