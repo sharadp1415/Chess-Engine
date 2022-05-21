@@ -6,11 +6,13 @@ public class ChessState {
     // private final String test;
 
     private String[][] board;
+    private boolean[][] highlightBoard;
     private boolean isCheckmate;
     private boolean isCheck;
     private boolean isWhiteTurn;
 
     public ChessState(Chess game) {
+        this.highlightBoard = game.highlightBoard;
         this.isWhiteTurn = game.isWhiteTurn;
         this.board = game.board.boardString();
         this.isCheckmate = game.isCheckmate;
@@ -31,5 +33,9 @@ public class ChessState {
 
     public boolean getIsWhiteTurn() {
         return isWhiteTurn;
+    }
+
+    public boolean[][] getHighlightBoard() {
+        return highlightBoard;
     }
 }

@@ -29,6 +29,7 @@ import com.backend.chess_api.engine.Engine;
 public class Chess {
 
     public Board board;
+    public boolean[][] highlightBoard;
     public Stack<Move> moveStack;
     public boolean isWhiteTurn;
     public boolean drawOffered;
@@ -37,6 +38,7 @@ public class Chess {
 
     public Chess() {
         board = new Board(this);
+        highlightBoard = new boolean[8][8];
         moveStack = new Stack<>();
         isWhiteTurn = true;
         drawOffered = false;
@@ -409,6 +411,78 @@ public class Chess {
         // });
 
         return outputList;
+    }
+
+    public boolean processInput(String input) {
+        String[] array = input.split(" ");
+        Square start = board.board[Integer.parseInt(array[0])][Integer.parseInt(array[1])];
+        Square end = board.board[Integer.parseInt(array[2])][Integer.parseInt(array[3])];
+
+        Piece piece = start.piece;
+
+        if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
+            return false;
+        }
+
+        Move move = new Move(start, end, isWhiteTurn);
+
+        if (piece.isValidMove(start, end, this)) {
+            // add move to stack
+            performMove(move);
+            moveStack.add(move);
+            System.out.println();
+            board.printBoard();
+            isWhiteTurn = !isWhiteTurn;
+
+            if (board.inCheckmate(isWhiteTurn)) {
+                isCheckmate = true;
+                System.out.println("\nCheckmate");
+                if (!isWhiteTurn) {
+                    System.out.println("White wins");
+                } else {
+                    System.out.println("Black wins");
+                }
+            }
+
+            if (board.inCheck(isWhiteTurn)) {
+                isCheck = true;
+                System.out.print("\nCheck");
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void seeSquares(String input) {
+        String[] array = input.split(" ");
+        Square start = board.board[Integer.parseInt(array[0])][Integer.parseInt(array[1])];
+
+        Piece piece = start.piece;
+
+        if (piece == null || (isWhiteTurn && !piece.isWhite) || (!isWhiteTurn && piece.isWhite)) {
+            return;
+        }
+
+        for (int i = 0; i < board.board.length; i++) {
+            Square[] row = board.board[i];
+            for (int j = 0; j < row.length; j++) {
+                Square end = row[j];
+                if (piece.isValidMove(start, end, this)) {
+                    highlightBoard[i][j] = true;
+                }
+            }
+        }
+    }
+
+    public void resetHightlight() {
+        for (int i = 0; i < board.board.length; i++) {
+            Square[] row = board.board[i];
+            for (int j = 0; j < row.length; j++) {
+                highlightBoard[i][j] = false;
+            }
+        }
     }
 
     /**

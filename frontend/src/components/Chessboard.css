@@ -22,3 +22,11 @@
 .notcolored {
     background-color: rgb(240,217,181);
 }
+
+.dot {
+    height: 2px;
+  width: 2px;
+  color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}

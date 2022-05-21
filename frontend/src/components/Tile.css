@@ -1,0 +1,28 @@
+.image {
+    width: auto;
+    height: auto;
+}
+
+.icon {
+    margin: auto;
+    width: 90px;
+    position: absolute;
+    z-index: 0;
+}
+
+.occupied:hover {
+    cursor: pointer;
+}
+
+.greydot {
+    opacity: 50%;
+    width: 27px;
+    height: auto;
+    /* left: 31.5px; */
+    padding-left: 31.5px;
+    padding-top: 31.5px;
+    /* top: 35%; */
+    /* margin: auto; */
+    position: absolute;
+    z-index: 9;
+}
