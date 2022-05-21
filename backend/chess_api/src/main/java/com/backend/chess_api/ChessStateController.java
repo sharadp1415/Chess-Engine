@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ChessStateController {
 
-    Chess gameInstance;
+    Chess gameInstance = null;
 
-    @GetMapping("/test")
-    public ChessState chessState(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new ChessState(name);
+    // @GetMapping("/test")
+    // public ChessState chessState(@RequestParam(value = "name", defaultValue =
+    // "World") String name) {
+    // return new ChessState(name);
+    // }
+
+    @GetMapping("/new-game")
+    public ChessState newGameState() {
+        gameInstance = new Chess();
+        return new ChessState(gameInstance);
     }
 }

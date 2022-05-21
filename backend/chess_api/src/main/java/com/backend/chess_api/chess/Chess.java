@@ -30,8 +30,10 @@ public class Chess {
 
     public Board board;
     public Stack<Move> moveStack;
-    Boolean isWhiteTurn;
-    Boolean drawOffered;
+    public boolean isWhiteTurn;
+    public boolean drawOffered;
+    public boolean isCheckmate = false;
+    public boolean isCheck = false;
 
     public Chess() {
         board = new Board(this);
@@ -113,6 +115,7 @@ public class Chess {
             }
 
             if (board.inCheckmate(!isWhiteTurn)) {
+                isCheckmate = true;
                 System.out.println("\nCheckmate");
                 if (isWhiteTurn) {
                     System.out.println("White wins");
@@ -123,6 +126,7 @@ public class Chess {
             }
 
             if (board.inCheck(!isWhiteTurn)) {
+                isCheck = true;
                 System.out.print("\nCheck");
             }
 

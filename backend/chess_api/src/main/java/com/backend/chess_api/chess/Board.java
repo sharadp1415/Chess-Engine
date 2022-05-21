@@ -263,4 +263,18 @@ public class Board {
 
         return true;
     }
+
+    public String[][] boardString() {
+        String[][] matrix = new String[8][8];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j].piece != null) {
+                    matrix[i][j] = board[i][j].piece.toString().trim();
+                }
+            }
+        }
+
+        return matrix;
+    }
 }
