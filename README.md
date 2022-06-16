@@ -1,6 +1,6 @@
 # Chess Game & Engine
 
-### From Scratch Using OOP in Java, RESTful API with Spring Boot, & Front-End UI in React
+## From Scratch Using OOP in Java, RESTful API with Spring Boot, & Front-End UI in React
 
 Fully implemented chess game built completely from scratch using object-oriented design patterns, such as abstraction and polymorphism. 
 
