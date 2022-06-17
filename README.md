@@ -6,6 +6,6 @@ Developed chess game built completely from scratch using object-oriented design 
 
 Fully implemented chess engine using Minimax Algorithm with Alpha-Beta pruning. Able to calculate 5 levels deep and play at around 800 level. 
 
-
+Utilized Spring Boot to create a REST API middle-end. 
 
 Feature rich UI developed in React with capabilities to play against chess engine or another player. 
